@@ -2,7 +2,7 @@
 <form>
     <div class="form-group mb-2">
       <label class="mb-2" for="exampleFormControlInput1">Nombre del videojuego</label>
-      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+      <input type="text" class="form-control" id="exampleFormControlInput1">
     </div>
 
     <div class="form-group mb-2">
@@ -13,11 +13,7 @@
     <div class="form-group mb-2">
         <label for="exampleFormControlSelect2 mb-2">Generos</label>
         <select multiple class="form-control" id="exampleFormControlSelect2">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+          <option *ngFor="let genre of genrelist">{{genre.name}}</option>
         </select>
       </div>
 
@@ -25,11 +21,7 @@
     <div class="form-group mb-2">
       <label for="exampleFormControlSelect2 mb-2">Plataformas</label>
       <select multiple class="form-control" id="exampleFormControlSelect2">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
+        <option *ngFor="let platform of platformlist">{{platform.name}}</option>
       </select>
     </div>
     

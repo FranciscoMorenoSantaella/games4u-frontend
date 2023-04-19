@@ -1,46 +1,53 @@
-<div class="row">
-    <div class="col-12 col-md-3">
-<div class="card">
-    <img class="card-img-top" src="../../../assets/images/genshin.jpeg" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Ver juego</a>
-    </div>
-  </div>
+<div *ngIf="cargando" class="loading">
+  <div class="loading-spinner"></div>
 </div>
 
-<div class="col-12 col-md-3">
-    <div class="card">
-        <img class="card-img-top" src="../../../assets/images/league of legends.jpeg" alt="Card image cap">
+<div *ngIf="!cargando">
+  <div class="input-group justify-content-end">
+    <div class="form-outline">
+      <input type="search" placeholder="Nombre del videojuego" id="form1" class="form-control" />
+         </div>
+    <button type="button" (click)="getgamebyname('ota')" class="btn btn-primary">
+      <i class="fas fa-search"></i>
+    </button>
+  </div>
+  <div class="row">
+    <div *ngFor="let game of gamelist" class="col-12 col-sm-6 col-md-3">
+      <div class="card">
+        <img class="card-img-top" src="../../../assets/images/genshin.jpeg" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <h5 class="card-title">{{game.name}}</h5>
+          <a class="platforms" *ngFor="let platform of game.platforms">
+            {{platform.name}}
+          </a>
+          <p class="card-text">{{game.description}}</p>
+          <a href="#" class="btn btn-primary">Ver juego</a>
         </div>
       </div>
     </div>
-
-    <div class="col-12 col-md-3">
-        <div class="card">
-            <img class="card-img-top" src="../../../assets/images/diablo4.webp" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-
-        
-        <div class="col-12 col-md-3">
-            <div class="card">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </div>
+  </div>
+  <nav aria-label="...">
+    <ul class="pagination justify-content-center justify-content-md-end">
+      <li  class="page-item disabled">
+        <button disabled (click)="restPage()" *ngIf="this.actualpage == 0" class="page-link">Previous</button>
+      </li>
+      <li (click)="restPage()" *ngIf="this.actualpage != 0" class="page-item">
+        <span class="page-link">Previous</span>
+      </li>
+      <li *ngIf="this.actualpage !=0" class="page-item"><a (click)="changePage(this.actualpage-1)" class="page-link">{{this.actualpage-1}}</a></li>
+      <li class="page-item active">
+        <span class="page-link">
+          {{this.actualpage}}
+          <span class="sr-only">(current)</span>
+        </span>
+      </li>
+      <li class="page-item"><a *ngIf="gamelist.length == 4"  (click)="changePage(this.actualpage+1)" class="page-link">{{this.actualpage+1}}</a></li>
+      <li *ngIf="gamelist.length == 4" class="page-item">
+        <button  (click)="sumPage()" *ngIf="gamelist.length == 4" class="page-link" >Next</button>
+      </li>
+      <li  *ngIf="gamelist.length < 4" class="page-item disabled">
+        <button  (click)="sumPage()" *ngIf="gamelist.length < 4" class="page-link" disabled >Next</button>
+      </li>
+    </ul>
+  </nav>
 </div>

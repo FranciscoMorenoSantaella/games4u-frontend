@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+
+  constructor(private gameservice:GameService){
+
+  }
+
 
 }

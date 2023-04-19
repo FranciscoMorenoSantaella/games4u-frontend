@@ -1,4 +1,5 @@
 import { Genre } from "./Genre"
+import { Platform } from "./Platform"
 
 export interface Game {
     id:number,
@@ -7,5 +8,6 @@ export interface Game {
     precio:Number,
     earlyaccess:boolean,
     fechasalida:any,
-    genre:Genre[]
+    genres:Genre[]
+    platforms:Platform[];
 }

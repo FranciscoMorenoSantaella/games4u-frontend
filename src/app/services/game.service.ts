@@ -32,6 +32,19 @@ export class GameService {
     });
   }
 
-
-
+  public getGameByName(name:string): Promise<Game[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        console.log(name);
+        let result: any = await this.http
+          .get(this.endpoint + 'getgamebyname/ota')
+          .toPromise() as Game;
+        let gamelist = result.content; 
+        console.log(gamelist);
+        resolve(gamelist);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
 }
