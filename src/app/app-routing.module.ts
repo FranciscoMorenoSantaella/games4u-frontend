@@ -7,15 +7,17 @@ import { LibraryComponent } from './pages/library/library.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { UploadgameComponent } from './pages/uploadgame/uploadgame.component';
 import { GameslistComponent } from './pages/gameslist/gameslist.component';
+import { SearchComponent } from './pages/search/search.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
+  {path:'search',component:SearchComponent},
   {path:'signin', component:SigninComponent},
   {path:'signup', component:SignupComponent},
   {path:'juegos', component:GameslistComponent},
   {path:'deseados', component:WishlistComponent},
   {path:'biblioteca', component:LibraryComponent},
-  {path:'publicar', component:UploadgameComponent}
+  {path:'publicar', component:UploadgameComponent},
 ];
 
 @NgModule({

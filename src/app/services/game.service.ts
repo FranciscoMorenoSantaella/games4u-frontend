@@ -37,11 +37,9 @@ export class GameService {
       try {
         console.log(name);
         let result: any = await this.http
-          .get(this.endpoint + 'getgamebyname/ota')
-          .toPromise() as Game;
-        let gamelist = result.content; 
-        console.log(gamelist);
-        resolve(gamelist);
+          .get(this.endpoint + 'getgamebyname/' + name)
+          .toPromise();
+        resolve(result);
       } catch (error) {
         reject(error);
       }

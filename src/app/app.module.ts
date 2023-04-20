@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -14,6 +14,7 @@ import { FooterComponent } from './pages/footer/footer.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { UploadgameComponent } from './pages/uploadgame/uploadgame.component';
 import { GameslistComponent } from './pages/gameslist/gameslist.component';
+import { SearchComponent } from './pages/search/search.component';
 
 @NgModule({
   declarations: [
@@ -27,11 +28,13 @@ import { GameslistComponent } from './pages/gameslist/gameslist.component';
     FooterComponent,
     ContactComponent,
     UploadgameComponent,
-    GameslistComponent
+    GameslistComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [],

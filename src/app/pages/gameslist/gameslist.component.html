@@ -5,9 +5,9 @@
 <div *ngIf="!cargando">
   <div class="input-group justify-content-end">
     <div class="form-outline">
-      <input type="search" placeholder="Nombre del videojuego" id="form1" class="form-control" />
+      <input type="search" [(ngModel)] = "gamename" placeholder="Nombre del videojuego" id="form1" class="form-control" />
          </div>
-    <button type="button" (click)="getgamebyname('ota')" class="btn btn-primary">
+    <button type="button" (click)="getgamebyname(gamename)" class="btn btn-primary">
       <i class="fas fa-search"></i>
     </button>
   </div>
@@ -43,7 +43,7 @@
       </li>
       <li class="page-item"><a *ngIf="gamelist.length == 4"  (click)="changePage(this.actualpage+1)" class="page-link">{{this.actualpage+1}}</a></li>
       <li *ngIf="gamelist.length == 4" class="page-item">
-        <button  (click)="sumPage()" *ngIf="gamelist.length == 4" class="page-link" >Next</button>
+        <button  (click)="sumPage()" *ngIf="gamelist.length == 4" class="page-link">Next</button>
       </li>
       <li  *ngIf="gamelist.length < 4" class="page-item disabled">
         <button  (click)="sumPage()" *ngIf="gamelist.length < 4" class="page-link" disabled >Next</button>

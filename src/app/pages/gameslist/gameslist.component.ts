@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gameslist',
@@ -11,9 +12,10 @@ export class GameslistComponent {
     actualpage = 0;
     gameperpage = 4;
     gamesearch:any;
+    gamename:string = "";
     gamelist:any;
     gamelist2:any;
-    constructor(private gameservice:GameService){
+    constructor(private gameservice:GameService, private router:Router){
 
     }
 
@@ -54,7 +56,11 @@ export class GameslistComponent {
     }
 
     async getgamebyname(name:string){
+      this.cargando = true;
       this.gamesearch = await this.gameservice.getGameByName(name);
+      this.router.navigate(['/search'],{state:{data:this.gamesearch}})
+      this.cargando = false;
+      
     }
     
 }
