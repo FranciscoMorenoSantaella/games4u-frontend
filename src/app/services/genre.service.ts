@@ -9,15 +9,17 @@ export class GenreService {
   endpoint = "http://localhost:8080/genre/"
   constructor(private http:HttpClient) { }
 
+  /**
+   * Metodo que devuelve una lista de generos
+   * @returns una lista de generos
+   */
   public async getAllGenres():Promise<Genre> {
     return new Promise(async (resolve, reject) => {
       try {
         let result: any = (await this.http
           .get(this.endpoint)
           .toPromise()) as Genre;
-          
         resolve(result);
-
       } catch (error) {
         reject(error);
       }

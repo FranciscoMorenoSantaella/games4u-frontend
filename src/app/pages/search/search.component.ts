@@ -7,13 +7,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
-  data: any;
+  searchlist: any;
 
   constructor(private router: Router, private route: ActivatedRoute) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras.state as { data: any };
-    this.data = state?.data;
-    console.log(this.data);
+    this.searchlist = state?.data;
   }
 
 }

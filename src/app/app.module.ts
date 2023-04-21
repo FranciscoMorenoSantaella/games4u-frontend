@@ -15,6 +15,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { UploadgameComponent } from './pages/uploadgame/uploadgame.component';
 import { GameslistComponent } from './pages/gameslist/gameslist.component';
 import { SearchComponent } from './pages/search/search.component';
+import { GameComponent } from './pages/game/game.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { SearchComponent } from './pages/search/search.component';
     UploadgameComponent,
     GameslistComponent,
     SearchComponent,
+    GameComponent,
   ],
   imports: [
     BrowserModule,

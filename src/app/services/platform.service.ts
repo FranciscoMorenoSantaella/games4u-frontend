@@ -9,6 +9,10 @@ export class PlatformService {
   endpoint = "http://localhost:8080/platform/"
   constructor(private http:HttpClient) { }
 
+  /**
+   * Metodo que devuelve todas las plataformas
+   * @returns una lista de plataformas
+   */
   public async getAllPlatforms():Promise<Platform> {
     return new Promise(async (resolve, reject) => {
       try {

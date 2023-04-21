@@ -32,6 +32,29 @@ export class GameService {
     });
   }
 
+  /**
+   * Metodo en el que se busca juegos segun su nombre
+   * @param name es el nombre del juego
+   * @returns un listado de juegos
+   */
+  public searchGameByName(name:string): Promise<Game[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        console.log(name);
+        let result: any = await this.http
+          .get(this.endpoint + 'searchgamebyname/' + name)
+          .toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+  /**
+   * Metodo en el que se trae un juego segun su nombre
+   * @param name es el nombre del juego
+   * @returns devuelve un juego
+   */
   public getGameByName(name:string): Promise<Game[]> {
     return new Promise(async (resolve, reject) => {
       try {

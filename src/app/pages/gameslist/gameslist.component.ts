@@ -15,6 +15,7 @@ export class GameslistComponent {
     gamename:string = "";
     gamelist:any;
     gamelist2:any;
+    isshort = false;
     constructor(private gameservice:GameService, private router:Router){
 
     }
@@ -56,10 +57,16 @@ export class GameslistComponent {
     }
 
     async getgamebyname(name:string){
+      if(name.length >= 3){
       this.cargando = true;
-      this.gamesearch = await this.gameservice.getGameByName(name);
+      this.gamesearch = await this.gameservice.searchGameByName(name);
       this.router.navigate(['/search'],{state:{data:this.gamesearch}})
       this.cargando = false;
+      }else{
+        this.isshort = true;
+        await new Promise(resolve => setTimeout(resolve, 5000));
+        this.isshort = false;
+      }
       
     }
     

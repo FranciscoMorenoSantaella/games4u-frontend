@@ -8,9 +8,11 @@ import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { UploadgameComponent } from './pages/uploadgame/uploadgame.component';
 import { GameslistComponent } from './pages/gameslist/gameslist.component';
 import { SearchComponent } from './pages/search/search.component';
+import { GameComponent } from './pages/game/game.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
+  {path:'juego/:name', component:GameComponent},
   {path:'search',component:SearchComponent},
   {path:'signin', component:SigninComponent},
   {path:'signup', component:SignupComponent},

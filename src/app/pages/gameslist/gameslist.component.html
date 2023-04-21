@@ -2,16 +2,23 @@
   <div class="loading-spinner"></div>
 </div>
 
-<div *ngIf="!cargando">
+<div class="mt-4" *ngIf="!cargando">
   <div class="input-group justify-content-end">
-    <div class="form-outline">
-      <input type="search" [(ngModel)] = "gamename" placeholder="Nombre del videojuego" id="form1" class="form-control" />
+    <div class="col-10 form-outline">
+      <input type="search" (keyup.enter)="getgamebyname(gamename)" [(ngModel)] = "gamename" placeholder="Nombre del videojuego" id="form1" class="form-control" />
          </div>
-    <button type="button" (click)="getgamebyname(gamename)" class="btn btn-primary">
+         <div class="col-2">
+    <button style="width: 100%;" type="button" (click)="getgamebyname(gamename)" class="btn btn-primary">
       <i class="fas fa-search"></i>
     </button>
   </div>
-  <div class="row">
+  </div>
+  <div  class= "row">
+    <div class="text-sm-center text-md-justify justify-content-center justify-content-md-end ">
+  <span class="errorSpan" *ngIf="isshort == true">Busqueda con mínimo 3 caracteres</span>
+</div>
+  </div>
+  <div  class="row mt-4">
     <div *ngFor="let game of gamelist" class="col-12 col-sm-6 col-md-3">
       <div class="card">
         <img class="card-img-top" src="../../../assets/images/genshin.jpeg" alt="Card image cap">
@@ -21,7 +28,7 @@
             {{platform.name}}
           </a>
           <p class="card-text">{{game.description}}</p>
-          <a href="#" class="btn btn-primary">Ver juego</a>
+          <a href="/juego/{{game.name}}" class="btn btn-primary">Ver juego</a>
         </div>
       </div>
     </div>
