@@ -68,4 +68,74 @@ export class GameService {
       }
     });
   }
+
+  /**
+   * Metodo que trae una lista de juegos segun su publisher
+   * @param user_id es el id del publisher
+   * @returns devuelve una lista de juegos
+   */
+  public getGamesByPublisher(user_id:number): Promise<Game[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .get(this.endpoint + 'getgamesbypublisher/' + user_id)
+          .toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  public countSellGames(user_id:number): Promise<number> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .get(this.endpoint + 'countsellgames/' + user_id)
+          .toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  /**
+   * Metodo para añadir un juego a la libreria de un usuario
+   * @param game_id es el id del juego que vamos a añadir
+   * @param user_id es el id del usuario al que se le va a añadir el juego
+   * @returns un boolean para saber si se ha realizado la acción con exito
+   */
+  public addGameToLibrary(game_id:number,user_id:number): Promise<number> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .get(this.endpoint + 'addgametolibrary/' + game_id + '/' + user_id)
+          .toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  /**
+  * Metodo que trae los juegos que tiene comprados un usuario 
+  * @param user_id es el id del usuario del que vamos a traer los juegos comprados
+  * @returns una lista de juegos
+  */
+  public getLibraryById(user_id:number): Promise<Game[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .get(this.endpoint + 'getlibrarybyid/' + user_id)
+          .toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  
 }

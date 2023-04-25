@@ -16,7 +16,16 @@ import { UploadgameComponent } from './pages/uploadgame/uploadgame.component';
 import { GameslistComponent } from './pages/gameslist/gameslist.component';
 import { SearchComponent } from './pages/search/search.component';
 import { GameComponent } from './pages/game/game.component';
-
+import { AngularFireModule} from '@angular/fire/compat'
+import { environment } from 'src/enviroments/enviroment.prod';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule} from '@angular/material/toolbar';
+import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatButtonModule} from '@angular/material/button';
+import { ProfileComponent } from './pages/profile/profile.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,12 +41,20 @@ import { GameComponent } from './pages/game/game.component';
     GameslistComponent,
     SearchComponent,
     GameComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    ReactiveFormsModule,
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -20,6 +20,10 @@
           </li>
           <li class="nav-item">
             <!--<i class="fa-solid fa-star"></i> -->
+            <a class="nav-link" href="perfil">Perfil</a>
+          </li>
+          <li class="nav-item">
+            <!--<i class="fa-solid fa-star"></i> -->
             <a class="nav-link" href="juegos">Juegos</a>
           </li>
           <li class="nav-item dropdown">
@@ -41,10 +45,13 @@
 
         <ul class="d-flex navbar-nav">
             <li class="nav-item">
-                <a class="nav-link sign" href="signin">Iniciar sesión</a>
+                <a class="nav-link sign" *ngIf="logout == false" href="signin">Iniciar sesión</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link sign" href="signup">Registrarse</a>
+                <a class="nav-link sign" *ngIf="logout == false" href="signup">Registrarse</a>
+              </li>
+              <li class="nav-item" *ngIf="logout == true">
+                <a class="nav-link logout" (click)="closeSession()">Logout</a>
               </li>
         </ul>
       </div>

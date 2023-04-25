@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
 import { Router } from '@angular/router';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-gameslist',
@@ -8,7 +9,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./gameslist.component.css']
 })
 export class GameslistComponent {
-    cargando = true;
     actualpage = 0;
     gameperpage = 4;
     gamesearch:any;
@@ -16,7 +16,7 @@ export class GameslistComponent {
     gamelist:any;
     gamelist2:any;
     isshort = false;
-    constructor(private gameservice:GameService, private router:Router){
+    constructor(private gameservice:GameService, private router:Router, private loadingservice:LoadingService){
 
     }
 
@@ -25,49 +25,48 @@ export class GameslistComponent {
     }
 
     async cargarJuegos(){
+      this.loadingservice.show();
       this.gamelist = await this.gameservice.getGamesByPage(
         this.actualpage,
         this.gameperpage
         );
-      this.cargando = false;
+      this.loadingservice.hide();
     }
 
     async restPage() {
       this.actualpage--;
-      this.cargando = true;
+      this.loadingservice.show();
       this.cargarJuegos();
-      this.cargando = false;
+      this.loadingservice.hide();
     }
 
     async sumPage() {
       this.actualpage++;
-      this.cargando = true;
+      this.loadingservice.show();
       this.cargarJuegos();
-      this.cargando = false;      
+      this.loadingservice.hide();      
     }
 
     async changePage(num:number){
-      this.cargando = true;
+      this.loadingservice.show();
       this.gamelist = await this.gameservice.getGamesByPage(
         num,
         this.gameperpage
         );
       this.actualpage = num;
-      this.cargando = false;
+      this.loadingservice.hide();
     }
 
     async getgamebyname(name:string){
       if(name.length >= 3){
-      this.cargando = true;
+      this.loadingservice.show();
       this.gamesearch = await this.gameservice.searchGameByName(name);
       this.router.navigate(['/search'],{state:{data:this.gamesearch}})
-      this.cargando = false;
+      this.loadingservice.hide();
       }else{
         this.isshort = true;
         await new Promise(resolve => setTimeout(resolve, 5000));
         this.isshort = false;
-      }
-      
+      } 
     }
-    
 }

@@ -9,27 +9,24 @@
                     <div class="card-body p-4 p-md-5">
                         <h3 class="mb-4 text-center">Registrate</h3>
 
-                        <form class="px-md-2">
+                        <form [formGroup]="formSignUp" class="px-md-2">
 
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form3Example1q">Name</label>
-                                <input type="text" id="form3Example1q" class="form-control" placeholder="Juan" />
+                                <label class="form-label">Name</label>
+                                <input formControlName="name" type="text" class="form-control" placeholder="Juan" />
                             </div>
 
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form3Example1q">Email</label>
-                                <input type="email" id="form3Example1q" class="form-control" placeholder="ejemplo@gmail.com" />
+                                <label class="form-label">Email</label>
+                                <input formControlName="email" type="email" class="form-control" placeholder="ejemplo@gmail.com" />
                             </div>
 
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form3Example1q">Contraseña</label>
-                                <input type="password" id="form3Example1q" class="form-control" placeholder="password" />
+                                <label class="form-label">Contraseña</label>
+                                <input type="password" formControlName="password" class="form-control" placeholder="password" />
                             </div>
-
-                            <button type="submit" class="btn btn-success btn-lg mb-1">Submit</button>
-
+                            <button type="submit" (click)="signUp()" class="btn btn-success btn-lg mb-1">Submit</button>
                         </form>
-
                     </div>
                 </div>
             </div>

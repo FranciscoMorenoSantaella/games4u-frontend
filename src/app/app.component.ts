@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoadingService } from './services/loading.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  loading = this.loadingservice.loading$;
+
+  constructor(private loadingservice:LoadingService){
+
+  }
+
+  ngOnInit(){
+    
+  }
   title = 'Games4u-Frontend';
 }
