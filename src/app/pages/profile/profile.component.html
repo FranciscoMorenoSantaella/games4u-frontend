@@ -14,7 +14,7 @@
                 </button>
               </div>
               <div class="ms-3" style="margin-top: 130px;">
-                <h5>{{user?.name}}</h5>
+                <h4>{{user?.name}} {{user?.balance}}€</h4>
                 <p>{{user?.email}}</p>
               </div>
             </div>
@@ -31,6 +31,7 @@
                 <p class="lead fw-normal mb-1">Juegos Publicados</p>
                 <div class="p-4" style="background-color: #f8f9fa;">
                   <p *ngFor="let game of gamelist " class="font-italic mb-1"><a href="juego/{{game.name}}">{{game.name}}</a></p>
+                  <p class="text-center" *ngIf="gamelist.length == 0">No has publicado juegos todavía</p>
                 </div>
               </div>
             </div>

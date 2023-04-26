@@ -3,5 +3,6 @@ export interface User {
     name:string,
     email:string,
     admin:boolean,
-    uid:string
+    uid:string,
+    balance:number
 }

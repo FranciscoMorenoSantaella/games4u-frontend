@@ -51,6 +51,7 @@ export class SignupComponent {
             email: this.formSignUp.get('email')!.value,
             uid: result.user.uid,
             admin: false,
+            balance:0
           }
           console.log(newUser);
          let user = await this.userservice.createUser(newUser);

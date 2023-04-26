@@ -55,7 +55,7 @@ export class GameService {
    * @param name es el nombre del juego
    * @returns devuelve un juego
    */
-  public getGameByName(name:string): Promise<Game[]> {
+  public getGameByName(name:string): Promise<Game> {
     return new Promise(async (resolve, reject) => {
       try {
         console.log(name);

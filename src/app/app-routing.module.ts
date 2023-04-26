@@ -10,6 +10,7 @@ import { GameslistComponent } from './pages/gameslist/gameslist.component';
 import { SearchComponent } from './pages/search/search.component';
 import { GameComponent } from './pages/game/game.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { ShoppingcartComponent } from './pages/shoppingcart/shoppingcart.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path:'juegos', component:GameslistComponent},
   {path:'deseados', component:WishlistComponent},
   {path:'biblioteca', component:LibraryComponent},
+  {path:'carro', component:ShoppingcartComponent},
   {path:'publicar', component:UploadgameComponent},
 ];
 

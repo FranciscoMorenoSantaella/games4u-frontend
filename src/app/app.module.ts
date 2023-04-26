@@ -25,7 +25,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatButtonModule} from '@angular/material/button';
-import { ProfileComponent } from './pages/profile/profile.component'
+import { ProfileComponent } from './pages/profile/profile.component';
+import { ShoppingcartComponent } from './pages/shoppingcart/shoppingcart.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +43,7 @@ import { ProfileComponent } from './pages/profile/profile.component'
     SearchComponent,
     GameComponent,
     ProfileComponent,
+    ShoppingcartComponent,
   ],
   imports: [
     BrowserModule,
