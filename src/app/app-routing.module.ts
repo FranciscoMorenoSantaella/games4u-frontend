@@ -18,7 +18,7 @@ const routes: Routes = [
   {path:'signin', component:SigninComponent},
   {path:'signup', component:SignupComponent},
   {path:'perfil', component:ProfileComponent},
-  {path:'juego/:name', component:GameComponent},
+  {path:'juego/:id', component:GameComponent},
   {path:'juegos', component:GameslistComponent},
   {path:'deseados', component:WishlistComponent},
   {path:'biblioteca', component:LibraryComponent},

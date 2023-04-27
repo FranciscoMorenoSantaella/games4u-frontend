@@ -11,10 +11,9 @@ export class OrderService {
   endpoint = "http://localhost:8080/order"
   constructor(private http:HttpClient) { }
 
-  public async postOrder(order:Order):Promise<User>{
+  public async postOrder(order:Order):Promise<Order>{
     return new Promise(async (resolve, reject) => {
       try {
-        console.log(order + "entro");
         let result: any = await this.http.post(this.endpoint, order).toPromise();
         resolve(result);
       } catch (error) {

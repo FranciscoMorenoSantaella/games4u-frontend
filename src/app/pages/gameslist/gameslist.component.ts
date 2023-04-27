@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
 import { Router } from '@angular/router';
 import { LoadingService } from 'src/app/services/loading.service';
+import { Game } from 'src/app/models/Game';
 
 @Component({
   selector: 'app-gameslist',
@@ -13,8 +14,8 @@ export class GameslistComponent {
     gameperpage = 4;
     gamesearch:any;
     gamename:string = "";
-    gamelist:any;
-    gamelist2:any;
+    gamelist:Game[] = [];
+    gamelist2:Game[] = [];
     isshort = false;
     constructor(private gameservice:GameService, private router:Router, private loadingservice:LoadingService){
 
@@ -22,6 +23,7 @@ export class GameslistComponent {
 
     async ngOnInit() {
       this.cargarJuegos();
+      
     }
 
     async cargarJuegos(){
@@ -31,6 +33,7 @@ export class GameslistComponent {
         this.gameperpage
         );
       this.loadingservice.hide();
+      console.log(this.gamelist);
     }
 
     async restPage() {

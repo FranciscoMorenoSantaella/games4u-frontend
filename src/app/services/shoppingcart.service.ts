@@ -13,17 +13,39 @@ export class ShoppingcartService {
    * @param user_id es el id del usuario del que queremos saber su ultimo carro de la compra con ispayed = false
    * @returns devuelve una promesa con el id del ultimo carro de la compra que no esta pagado
    */
-  public async getLastShoppingCartIdNotPayedByClientId(
+  public async getLastShoppingCartIdNotPayedByUserId(
     user_id: number
   ): Promise<number> {
     return new Promise(async (resolve, reject) => {
       try {
+        console.log(user_id);
         let result: any = (await this.http
           .get(
             this.endpoint +
-              'getlastshoppingcartidnotpayedbyclientid' +
+              'getlastshoppingcartidnotpayedbyuserid' +
               '/' +
               user_id
+          )
+          .toPromise()) as number;
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  public async isGameInShoppingCart(
+    user_id: number, game_id:number
+  ): Promise<number> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        console.log(user_id);
+        let result: any = (await this.http
+          .get(
+            this.endpoint +
+              'isgameinshoppingcart' +
+              '/' +
+              user_id + '/' + game_id
           )
           .toPromise()) as number;
         resolve(result);

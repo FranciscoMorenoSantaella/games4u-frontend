@@ -137,5 +137,49 @@ export class GameService {
     });
   }
 
-  
+  public getGameById(id:number): Promise<Game> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .get(this.endpoint + id)
+          .toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  /**
+   * Metodo que comprueba si un juego esta en la biblioteca de un usuario
+   * @param user_id es id del usuario del que se va a comprobar si el juego esta en su biblioteca
+   * @param game_id es el id del juego que se va a comprobar si esta en la biblioteca
+   * @returns devuelve el numero de filas devueltas, si es uno es que el juego esta en la biblioteca, si devuelve 0 es que no esta
+   */
+  public isGameInLibrary(user_id:number,game_id:number): Promise<number> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .get(this.endpoint + 'isgameinlibrary/' + user_id + '/' + game_id)
+          .toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  public getGamesFromLibrary(page: Number, limit: Number, user_id:number): Promise<Game[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .get(this.endpoint + 'getgamesfromlibrary/' + page + '/' + limit + '/' + user_id)
+          .toPromise();
+        let gamelist = result.content;
+        resolve(gamelist);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
 }

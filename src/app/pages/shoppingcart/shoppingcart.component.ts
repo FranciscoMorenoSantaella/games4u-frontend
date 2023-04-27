@@ -31,7 +31,7 @@ export class ShoppingcartComponent {
     */
   async getLastShoppingCartIdNotPayedByClientId(user_id: number) {
     this.shoppingcartid =
-      await this.shoppingcartservice.getLastShoppingCartIdNotPayedByClientId(
+      await this.shoppingcartservice.getLastShoppingCartIdNotPayedByUserId(
         user_id
       );
     console.log(this.shoppingcartid);

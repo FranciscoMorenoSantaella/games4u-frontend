@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'app-library',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./library.component.css']
 })
 export class LibraryComponent {
+  gamelist:any;
+  constructor(private gameservice:GameService){
 
+  }
+
+  ngOnInit(){
+    
+  }
+  
 }

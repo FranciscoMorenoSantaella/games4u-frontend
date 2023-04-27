@@ -1,7 +1,9 @@
+import { User } from "./User";
+
 export interface Shoppingcart {
     id:Number,
-    ispayed:Boolean,
+    ispayed?:Boolean,
     paydate?:Date,
-    total_price:number,
-    
+    total_price?:number,
+    user:User
   }

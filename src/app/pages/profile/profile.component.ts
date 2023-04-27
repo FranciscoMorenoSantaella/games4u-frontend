@@ -12,13 +12,13 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class ProfileComponent {
     user?:User;
-    gamelist!:Game[];
+    gamelist:Game[] = [];
     sell:number = 0;
     constructor(private storage:StorageService, private gameservice:GameService, private loadingservice:LoadingService){
 
     }
 
-    ngOnInit(){
+    async ngOnInit(){
       this.loadingservice.show();
       this.showData();
       this.getGames();
