@@ -10,4 +10,5 @@ export interface Game {
     fechasalida?:any,
     genres?:Genre[]
     platforms?:Platform[];
+    files?:File[];
 }

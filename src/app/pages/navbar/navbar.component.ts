@@ -14,13 +14,12 @@ export class NavbarComponent {
 
   }
 
-  ngOnInit(){
-    this.showLogout();
-   
+  async ngOnInit(){
+    await this.showLogout();
   }
 
   async showLogout(){
-    if(this.storage.getSession() == null){
+    if(await this.storage.getSession() == null){
       this.logout = false;
     }else{
       this.logout = true;
