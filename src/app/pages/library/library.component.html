@@ -8,7 +8,7 @@
               <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
                 <div class="bg-image hover-zoom ripple rounded ripple-surface">
                   <div *ngFor="let file of game.files">
-                  <img *ngIf="file.executable==0" style="max-height: 300px;" src="http://localhost:8080/file/files/{{file.uniquename}} "
+                  <img *ngIf="file.executable==false || file.executable==null" style="max-height: 300px;" src="http://localhost:8080/file/files/{{file.uniquename}} "
                     class="w-100" />
                   </div>
                   <a href="#!">
@@ -21,7 +21,7 @@
               <div class="col-md-6 col-lg-6 col-xl-6">
                 <h3>{{game.name}}</h3>
                 <div class="mt-4 mb-0 text-muted small">
-                  <a *ngFor="let genre of game.genreslist">{{genre.name}}</a>
+                  <a *ngFor="let genre of game.genres">{{genre.name}}</a>
                 </div>
                 <div class="mt-4 mb-2 text-muted small">
                   <a *ngFor="let platform of game.platforms">{{platform.name}}</a>
@@ -30,11 +30,13 @@
                   {{game.description}}
                 </p>
               </div>
-              <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start d-flex align-items-center justify-content-center mt-5">
-                <div *ngFor="let file of game.files" class="w-100">
-                  <button *ngIf="file.executable==1" (click)="download(file.uniquename,file.originalname)" class="btn btn-outline-primary btn-sm w-100" type="button">
+              <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start d-flex align-items-center justify-content-center">
+                <div class="w-100">
+                  <div *ngFor="let file of game.files">
+                  <button *ngIf="file.executable==true" (click)="download(file.uniquename,file.originalname)" class="btn btn-outline-primary btn-sm w-100" type="button">
                     Descargar
                   </button>
+                </div>
                 </div>
               </div>
               
@@ -59,7 +61,7 @@
             
             <li class="page-item"><a *ngIf="gamelist.length == 5"  (click)="changePage(this.actualpage+1)" class="page-link">{{this.actualpage+1}}</a></li>
             <li *ngIf="gamelist.length == 1" class="page-item">
-              <button  (click)="sumPage()" *ngIf="gamelist.length == 5" class="page-link">Next</button>
+              <button  (click)="sumPage()" class="page-link">Next</button>
             </li>
             <li  *ngIf="gamelist.length < 5" class="page-item disabled">
               <button  (click)="sumPage()" *ngIf="gamelist.length < 5" class="page-link" disabled >Next</button>

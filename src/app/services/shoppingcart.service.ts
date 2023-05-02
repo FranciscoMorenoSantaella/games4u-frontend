@@ -54,4 +54,23 @@ export class ShoppingcartService {
       }
     });
   }
+
+  
+  /**
+   * Metodo que calcula el precio total de la suma de todos los juegos
+   * @param shoppingcart_id es el id del carro de la compra
+   * @returns devuelve una promesa con el precio total
+   */
+  public async getTotalPrice(shoppingcart_id: number): Promise<number> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = (await this.http
+          .get(this.endpoint + 'totalprice' + '/' + shoppingcart_id)
+          .toPromise()) as number[];
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
 }

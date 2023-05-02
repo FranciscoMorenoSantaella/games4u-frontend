@@ -32,7 +32,7 @@ export class UserService {
      * @param uid es la uid del clente (la que devuelve firebase)
      * @returns un usuario
      */
-    public async getUserByUid(uid:String){
+    public async getUserByUid(uid:String):Promise<User>{
       return new Promise(async (resolve, reject) => {
         try {
           let result: any = await this.http.get(this.endpoint+ "conseguirusuario/" + uid).toPromise();

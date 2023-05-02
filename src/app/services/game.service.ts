@@ -182,4 +182,18 @@ export class GameService {
       }
     });
   }
+
+  public getGamesFromWishlist(page: Number, limit: Number, user_id:number): Promise<Game[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .get(this.endpoint + 'getgamesfromwishlist/' + page + '/' + limit + '/' + user_id)
+          .toPromise();
+        let gamelist = result.content;
+        resolve(gamelist);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
 }
