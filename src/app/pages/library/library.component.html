@@ -1,9 +1,13 @@
-<section style="background-color: #eee;">
+<section>
   <div class="container py-5">
     <div class="row justify-content-center">
       <div class="col-md-12 col-xl-10">
         <div class="card shadow-0 border rounded-3">
           <div class="card-body">
+            <div *ngIf="gamelist.length == 0">
+              <h1 class="text-center">Todavía no tienes ningún juego</h1>
+              <a class="text-center btn btn-outline-primary btn-sm w-100"  href="/juegos"> Ir a ver juegos</a>
+            </div>
             <div  *ngFor="let game of gamelist" class="row mt-2">
               <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
                 <div class="bg-image hover-zoom ripple rounded ripple-surface">
@@ -21,7 +25,7 @@
               <div class="col-md-6 col-lg-6 col-xl-6">
                 <h3>{{game.name}}</h3>
                 <div class="mt-4 mb-0 text-muted small">
-                  <a *ngFor="let genre of game.genres">{{genre.name}}</a>
+                  <a *ngFor="let genre of game.genreslist">{{genre.name}}</a>
                 </div>
                 <div class="mt-4 mb-2 text-muted small">
                   <a *ngFor="let platform of game.platforms">{{platform.name}}</a>
@@ -60,8 +64,8 @@
             </li>
             
             <li class="page-item"><a *ngIf="gamelist.length == 5"  (click)="changePage(this.actualpage+1)" class="page-link">{{this.actualpage+1}}</a></li>
-            <li *ngIf="gamelist.length == 1" class="page-item">
-              <button  (click)="sumPage()" class="page-link">Next</button>
+            <li *ngIf="gamelist.length == 5" class="page-item">
+              <button  (click)="sumPage()" *ngIf="gamelist.length == 5" class="page-link">Next</button>
             </li>
             <li  *ngIf="gamelist.length < 5" class="page-item disabled">
               <button  (click)="sumPage()" *ngIf="gamelist.length < 5" class="page-link" disabled >Next</button>

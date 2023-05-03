@@ -9,6 +9,7 @@ import { AlertService } from 'src/app/services/alert.service';
 import { Order } from 'src/app/models/Order';
 import { ShoppingcartService } from 'src/app/services/shoppingcart.service';
 import { OrderService } from 'src/app/services/order.service';
+import { Game } from 'src/app/models/Game';
 
 @Component({
   selector: 'app-wishlist',
@@ -18,7 +19,7 @@ import { OrderService } from 'src/app/services/order.service';
 export class WishlistComponent {
   isinlibrary:any;
   isinshoppingcart:any;
-  gamelist:any;
+  gamelist:Game[] = [];
   actualpage:number = 0;
   gamesperpage:number = 1;
   user!:User;

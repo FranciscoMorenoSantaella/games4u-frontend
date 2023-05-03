@@ -73,4 +73,28 @@ export class ShoppingcartService {
       }
     });
   }
+
+   /**
+   * Metodo encargado de comprar el carro de la compra este metodo le resta el saldo al usuario y pone el carro de la compra en pagado
+   * @param user_id es el id del usuario del que queremos pagar su carro de la compra
+   * @param shoppingcart_id es el id del carro de la compra que queremos pagar
+   * @returns 
+   */
+   public async payShoppingCart(
+    user_id: number, shoppingcart_id: number
+  ): Promise<Boolean> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = (await this.http
+          .get(
+            this.endpoint + 'payshoppingcart/' + user_id + '/' + shoppingcart_id
+          )
+          .toPromise()) as Boolean;
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
 }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Order } from 'src/app/models/Order';
 import { User } from 'src/app/models/User';
+import { AlertService } from 'src/app/services/alert.service';
+import { GameService } from 'src/app/services/game.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { OrderService } from 'src/app/services/order.service';
 import { ShoppingcartService } from 'src/app/services/shoppingcart.service';
@@ -19,7 +21,8 @@ export class ShoppingcartComponent {
   precio:number = 0;
   orderlist:any;
   constructor(private shoppingcartservice:ShoppingcartService, private loadingservice:LoadingService, 
-    private storage:StorageService, private orderservice:OrderService,private userservice:UserService){
+    private storage:StorageService, private orderservice:OrderService,private userservice:UserService,
+    private alertservice:AlertService, private gameservice:GameService){
 
   }
 
@@ -71,5 +74,41 @@ export class ShoppingcartComponent {
     async getUser(){
       this.user = await this.userservice.getUserByUid(this.user!.uid);
       this.storage.setSession(this.user);
+    }
+
+    /**
+     * IMPORTANTE HACER QUE CUANDO SE VA A PAGAR EL CARRO DE LA COMPRA LLAMAR A GETUSER PARA COMPROBAR QUE SU SALDO ESTE BIEN
+     * Y LUEGO VOLVER A LLAMAR A GETUSER PARA ESTABLECER EL STORAGE POR SI LUEGO VA A SU PERFIL QUE SE VEA ACTUALIZADO EL SALDO ESTO MAÑANA
+     */
+
+
+    async payShoppingCart(){
+      this.loadingservice.show();
+      await this.getOrderByShoppingCartId(this.shoppingcartid);
+      await this.getTotalPrice();
+      this.loadingservice.hide();
+      let confirmed = await this.alertservice.showConfirmAlert("¿Estás seguro de que quieres realizar la compra? precio final " + this.precio);
+      if(confirmed){
+        this.loadingservice.show();
+        await this.getUser();
+        if(this.user!.balance >= this.precio){
+          let payed = await this.shoppingcartservice.payShoppingCart(this.user!.id,this.shoppingcartid);
+          for (let index = 0; index < this.orderlist.length; index++) {
+            this.gameservice.addGameToLibrary(this.orderlist[index].game.id,this.user!.id);
+          }
+
+          if(payed){
+            this.alertservice.showSuccessMessage("La compra se ha realizado correctamente");
+          }else{
+            this.alertservice.showErrorMessage("Ha ocurrido un error y no se ha podido pagar, inténtalo mas tarde");
+          }
+        }else{
+          this.alertservice.showErrorMessage("No tienes suficiente saldo");
+        }
+      }else{
+
+      }
+      await this.getUser();
+      this.loadingservice.hide();
     }
 }

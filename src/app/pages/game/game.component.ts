@@ -32,9 +32,10 @@ export class GameComponent {
   async ngOnInit() {
     this.loadingservice.show();
     this.id = this.route.snapshot.params['id'];
-    //await this.getGameById();
+    await this.getGameById();
     await this.getUser();
     this.loadingservice.hide();
+    console.log(this.game);
 }
 
   async getGameById() {
@@ -85,5 +86,7 @@ export class GameComponent {
   async isGameInShoppingCart(){
     this.isinshoppingcart = await this.shoppingcartservice.isGameInShoppingCart(this.user.id,this.game.id);
   }
+
+  
 
 }

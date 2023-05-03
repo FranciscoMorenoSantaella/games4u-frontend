@@ -58,21 +58,20 @@
               <div class="col-lg-4 bg-grey">
                 <div class="p-5">
                   <h3 class="fw-bold mb-5 mt-2 pt-1">Precio total</h3>
-                  <hr class="my-4">
+                  
 
-                  <div class="d-flex justify-content-between mb-4">
+                <!--  <div class="d-flex justify-content-between mb-4">
                     <h5 class="text-uppercase">Número de productos 1</h5>
                     <h5>€ 132.00</h5>
                   </div>
-
-                  <hr class="my-4">
+                -->
 
                   <div class="d-flex justify-content-between mb-5">
                     <h5 class="text-uppercase">Total price</h5>
                     <h5>{{precio}} €</h5>
                   </div>
 
-                  <button type="button" class="btn btn-outline-dark btn-sm w-100"
+                  <button (click)="payShoppingCart()" type="button" class="btn btn-outline-dark btn-sm w-100"
                     data-mdb-ripple-color="dark">Pagar</button>
 
                 </div>

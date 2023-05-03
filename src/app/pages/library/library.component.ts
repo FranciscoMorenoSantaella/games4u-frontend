@@ -24,6 +24,7 @@ export class LibraryComponent {
  async ngOnInit(){
     this.getGamesFromLibrary();
     this.user = await this.storage.getSession();
+    console.log(this.user)
   }
   
   /**
@@ -31,7 +32,7 @@ export class LibraryComponent {
    */
   async getGamesFromLibrary(){
     this.loadingservice.show();
-    this.gamelist = await this.gameservice.getGamesFromLibrary(0,this.gamesperpage,4);
+    this.gamelist = await this.gameservice.getGamesFromLibrary(0,this.gamesperpage,8  );
     console.log(this.gamelist);
     this.loadingservice.hide();
   } 

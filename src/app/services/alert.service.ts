@@ -34,5 +34,19 @@ export class AlertService {
       text: message
     });
   }
+
+  showConfirmAlert(message: string): Promise<boolean> {
+    return Swal.fire({
+      icon: 'info',
+      title: 'Información',
+      text: message,
+      showCancelButton: true,
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      return result.isConfirmed; // Devuelve true si el usuario hizo clic en "Aceptar", false si hizo clic en "Cancelar" o cerró la alerta
+    });
+  }
+  
 }
   

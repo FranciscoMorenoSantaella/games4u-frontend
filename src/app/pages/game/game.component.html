@@ -1,22 +1,26 @@
-<div class="row col-md-8 offset-md-2">
-    <div>
-        <p class="h1 text-center">League of legends</p>
-    </div>
-    <div class="row">
-        <button class="btn btn-primary" (click)="addProductToOrder()">Añadir al carro de la compra</button>
-        <div class="col-8">
-            <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores cupiditate incidunt deleniti libero
-                iusto sed similique esse aut, corporis blanditiis iure impedit, tempore facilis earum laudantium ea.
-                Ratione, temporibus dolorum.
-                
-            </p>
-            <div class="row">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam soluta impedit voluptate quos reprehenderit magni! Rerum delectus sequi, voluptas voluptates dolore autem ratione, corrupti aut ipsum unde, obcaecati maiores ea.</p>
-            </div>
+<section>
+<div class="d-flex justify-content-center align-items-center">
+    <div class="card col-md-8 col-12">
+      <div *ngFor="let file of game.files">
+      <img *ngIf="file.executable==false" class="card-img-top" src="http://localhost:8080/file/files/{{file.uniquename}}" alt="Card image cap">
+      </div>
+      <div class="card-body">
+        <div>
+        <h3 class="card-title">Nombre: {{game.name}}</h3>
+        <h3>{{game.precio}} €</h3>
+        </div>  
+        <div>
+            Géneros:
+        <span class="badge bg-primary" *ngFor="let genre of game.genreslist">{{genre.name}}</span>
         </div>
-        <div class="col-4">
-            <img style="max-width: 347px; max-height: 195px;" src="../../../assets/images/leagueoflegends-horizontal.jpeg">
-        </div>
+        <div>
+            Plataformas:
+        <span *ngFor="let platform of game.platforms" class="badge bg-primary">{{platform.name}}</span>
+          </div>
+        <p class="card-text">Descripción: {{game.description}}</p>
+        <a  (click)="addProductToOrder()" class="mb-2 btn btn-outline-primary btn-sm w-100">Añadir al carro de la compra</a>
+        <a  class="btn btn-outline-primary btn-sm w-100">Añadir a la lista de deseados</a>
+      </div>
     </div>
-</div>
+  </div>
+</section>

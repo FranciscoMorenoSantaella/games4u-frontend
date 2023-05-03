@@ -14,7 +14,7 @@ export class GameslistComponent {
     gameperpage = 4;
     gamesearch:any;
     gamename:string = "";
-    gamelist!:Game[];
+    gamelist:Game[] = [];
     isshort = false;
     constructor(private gameservice:GameService, private router:Router, private loadingservice:LoadingService){
 

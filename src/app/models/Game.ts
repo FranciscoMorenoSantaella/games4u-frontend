@@ -9,7 +9,7 @@ export interface Game {
     precio:Number,
     earlyaccess?:boolean,
     fechasalida?:any,
-    genres:Genre[]
+    genreslist:Genre[]
     platforms:Platform[];
     files:File[];
 }

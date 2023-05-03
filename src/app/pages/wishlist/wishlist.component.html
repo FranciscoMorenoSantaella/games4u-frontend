@@ -1,15 +1,21 @@
-<section style="background-color: #eee;">
+<section>
   <div class="container py-5">
     <div class="row justify-content-center">
       <div class="col-md-12 col-xl-10">
         <div class="card shadow-0 border rounded-3">
           <div class="card-body">
-            <div  *ngFor="let game of gamelist" class="row mt-2">
+            <div>
+              <h1 class="text-center">
+                No tienes ningún juego en tu lista de deseados
+              </h1>
+              <a class="text-center btn btn-outline-primary btn-sm w-100"  href="/juegos"> Ir a ver juegos</a>
+            </div>
+            <div *ngFor="let game of gamelist" class="row mt-2">
               <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
                 <div class="bg-image hover-zoom ripple rounded ripple-surface">
                   <div *ngFor="let file of game.files">
-                  <img *ngIf="file.executable==0" style="max-height: 300px;" src="http://localhost:8080/file/files/{{file.uniquename}} "
-                    class="w-100" />
+                    <img *ngIf="file.executable==false" style="max-height: 300px;"
+                      src="http://localhost:8080/file/files/{{file.uniquename}} " class="w-100" />
                   </div>
                   <a href="#!">
                     <div class="hover-overlay">
@@ -30,44 +36,46 @@
                   {{game.description}}
                 </p>
               </div>
-              <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start d-flex align-items-center justify-content-center ">
+              <div
+                class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start d-flex align-items-center justify-content-center ">
                 <button (click)="addProductToOrder(game.id)" class="btn btn-outline-primary btn-sm w-100" type="button">
                   Añadir al carro de la compra
                 </button>
               </div>
-              
+
             </div>
           </div>
         </div>
         <nav aria-label="...">
           <ul class="pagination justify-content-center justify-content-md-end">
-            <li  class="page-item disabled">
+            <li class="page-item disabled">
               <button disabled (click)="restPage()" *ngIf="this.actualpage == 0" class="page-link">Previous</button>
             </li>
             <li (click)="restPage()" *ngIf="this.actualpage != 0" class="page-item">
               <span class="page-link">Previous</span>
             </li>
-            <li *ngIf="this.actualpage !=0" class="page-item"><a (click)="changePage(this.actualpage-1)" class="page-link">{{this.actualpage-1}}</a></li>
+            <li *ngIf="this.actualpage !=0" class="page-item"><a (click)="changePage(this.actualpage-1)"
+                class="page-link">{{this.actualpage-1}}</a></li>
             <li class="page-item active">
               <span class="page-link">
                 {{this.actualpage}}
                 <span class="sr-only">(current)</span>
               </span>
             </li>
-            
-            <li class="page-item"><a *ngIf="gamelist.length == 5"  (click)="changePage(this.actualpage+1)" class="page-link">{{this.actualpage+1}}</a></li>
-            <li *ngIf="gamelist.length == 1" class="page-item">
-              <button  (click)="sumPage()" *ngIf="gamelist.length == 5" class="page-link">Next</button>
+
+            <li class="page-item"><a *ngIf="gamelist.length == 5" (click)="changePage(this.actualpage+1)"
+                class="page-link">{{this.actualpage+1}}</a></li>
+            <li *ngIf="gamelist.length == 5" class="page-item">
+              <button (click)="sumPage()" *ngIf="gamelist.length == 5" class="page-link">Next</button>
             </li>
-            <li  *ngIf="gamelist.length < 5" class="page-item disabled">
-              <button  (click)="sumPage()" *ngIf="gamelist.length < 5" class="page-link" disabled >Next</button>
+            <li *ngIf="gamelist.length < 5" class="page-item disabled">
+              <button (click)="sumPage()" *ngIf="gamelist.length < 5" class="page-link" disabled>Next</button>
             </li>
           </ul>
         </nav>
       </div>
-      
+
     </div>
   </div>
 
 </section>
-

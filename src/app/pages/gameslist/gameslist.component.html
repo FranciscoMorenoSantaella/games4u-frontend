@@ -16,9 +16,9 @@
   </div>
   <div  class="row mt-4">
     <div *ngFor="let game of gamelist" class="col-12 col-sm-6 col-md-3">
-      <div class="card">
+      <div class="card" style="height:400px">
         <div *ngFor="let file of game.files">
-          <img *ngIf="file.executable==false" style="max-height: 300px;" src="http://localhost:8080/file/files/{{file.uniquename}} "
+          <img *ngIf="file.executable==false" height="200px" src="http://localhost:8080/file/files/{{file.uniquename}}"
             class="w-100" />
           </div>
         <div class="card-body">
@@ -27,7 +27,7 @@
             {{platform.name}}
           </a>
           <p class="card-text">{{game.description}}</p>
-          <a href="/juego/{{game.id}}" class="btn btn-outline-primary btn-sm w-100">Ver juego</a>
+          <a href="/juego/{{game.id}}" class="mt-auto btn btn-outline-primary btn-sm w-100">Ver juego</a>
         </div>
       </div>
     </div>
