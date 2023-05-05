@@ -1,3 +1,4 @@
+
 <section>
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -24,12 +25,14 @@
                   <div *ngIf="orderlist.length == 0">
                     <h2 class="text-center">No hay ordenes en el carro</h2>
                   </div>
-                  <div *ngFor="let order of orderlist"
-                    class="row mb-4 d-flex justify-content-between align-items-center">
-                    <div *ngFor="let file of order.game.files" class="col-md-2 col-lg-2 col-xl-2">
-                      <img *ngIf="file.executable == 0" src="http://localhost:8080/file/files/{{file.uniquename}} "
-                        class="img-fluid rounded-3" alt="Cotton T-shirt">
-                    </div>
+                  <div *ngFor="let order of orderlist; let i = index"
+                    class="row justify-content-between align-items-center mb-4 d-flex">
+                    <ng-container *ngFor="let file of order.game.files">
+                      <div *ngIf="file.executable == 0" class="col-md-2 col-lg-2 col-xl-2">
+                        <img src="http://localhost:8080/file/files/{{file.uniquename}}" class="img-fluid rounded-3" alt="Cotton T-shirt">
+                      </div>
+                    </ng-container>
+                    
                     <div class="col-md-3 col-lg-3 col-xl-3">
                       <h3>{{order.game.name}}</h3>
                     </div>
@@ -43,7 +46,7 @@
                       <h3 *ngIf="order.game.precio > 0">{{order.game.precio}} €</h3>
                     </div>
                     <div class="col-md-1 col-lg-1 col-xl-1 text-end text-center">
-                      <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
+                      <a (click)="removeFromShoppingCart(i)" class="text-muted"><i class="fas fa-times"></i></a>
                     </div>
                     <hr class="my-4">
                   </div>

@@ -35,27 +35,51 @@ export class GameComponent {
     await this.getGameById();
     await this.getUser();
     this.loadingservice.hide();
-    console.log(this.game);
 }
 
   async getGameById() {
-    this.game = await this.gameservice.getGameById(this.id);
+    try {
+      this.game = await this.gameservice.getGameById(this.id);
+    } catch (error) {
+      this.alertservice.showErrorMessage("No se ha encontrado un juego con ese id");
+    }
   }
 
   async addGameToLibrary() {
-    let aux = await this.gameservice.addGameToLibrary(this.game!.id, this.storage.getSession().id);
+    try {
+      let aux = await this.gameservice.addGameToLibrary(this.game!.id, this.storage.getSession().id);
+      if(aux){
+        this.alertservice.showSuccessMessage("Se ha añadido correctamente");
+      }else{
+        this.alertservice.showErrorMessage("No se ha podido añadir el juego a la biblioteca");
+      }
+    } catch (error) {
+      this.alertservice.showErrorMessage("Error al conectar con el servicio");
+    }
   }
 
   async getUser() {
-    this.user = await this.storage.getSession();
+    try {
+      this.user = await this.storage.getSession();
+    } catch (error) {
+      this.alertservice.showErrorMessage("Error:" + error);
+    }
   }
 
   async getLastShoppingCartIdNotPayedByUserId() {
-    this.shoppingcartid = await this.shoppingcartservice.getLastShoppingCartIdNotPayedByUserId(this.user.id);
+    try {
+      this.shoppingcartid = await this.shoppingcartservice.getLastShoppingCartIdNotPayedByUserId(this.user.id);
+      if(this.shoppingcartid == 0 || this.shoppingcartid == null){
+        this.alertservice.showErrorMessage("No se ha podido encontrar el carro de la compra");
+      }
+    } catch (error) {
+      this.alertservice.showErrorMessage("Error " + error);
+    }
   }
 
   async addProductToOrder() {
-    await this.isGameInLibrary();
+    try {
+      await this.isGameInLibrary();
     await this.getLastShoppingCartIdNotPayedByUserId();
     console.log(this.user.id);
     if (this.isinlibrary == 0) {
@@ -76,6 +100,9 @@ export class GameComponent {
       }
     } else {
       this.alertservice.showInfoMessage("Ya tienes este juego en tu biblioteca");
+    }
+    } catch (error) {
+      this.alertservice.showErrorMessage("Error " + error);
     }
 }
 

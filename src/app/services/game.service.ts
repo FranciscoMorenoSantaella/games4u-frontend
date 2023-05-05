@@ -196,4 +196,31 @@ export class GameService {
       }
     });
   }
+
+  public getSalesByPayDate(game_id:number): Promise<Object[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .get(this.endpoint + 'getsalesbypaydate/' + game_id)
+          .toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  public getSalesByGameId(game_id:number): Promise<Object[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .get(this.endpoint + 'getsalesbygameid/' + game_id)
+          .toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
 }

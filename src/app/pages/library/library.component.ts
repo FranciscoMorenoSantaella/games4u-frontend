@@ -32,7 +32,7 @@ export class LibraryComponent {
    */
   async getGamesFromLibrary(){
     this.loadingservice.show();
-    this.gamelist = await this.gameservice.getGamesFromLibrary(0,this.gamesperpage,8  );
+    this.gamelist = await this.gameservice.getGamesFromLibrary(0,this.gamesperpage,7 );
     console.log(this.gamelist);
     this.loadingservice.hide();
   } 

@@ -30,11 +30,18 @@
               <div class="mb-5">
                 <p class="lead fw-normal mb-1">Juegos Publicados</p>
                 <div class="p-4" style="background-color: #f8f9fa;">
-                  <p *ngFor="let game of gamelist " class="font-italic mb-1"><a href="juego/{{game.id}}">{{game.name}}</a></p>
+                  <p *ngFor="let game of gamelist " class="font-italic mb-1"><a href="estadisticas/{{game.id}}">{{game.name}}</a></p>
                   <p class="text-center" *ngIf="gamelist.length == 0">No has publicado juegos todavía</p>
-                </div>
+                </div>                
               </div>
+              <p class="lead fw-normal">Gráfico de ventas</p>
+              <div class="p-4" style="background-color: #f8f9fa;">
+              <p class="text-center" *ngIf="gamelist.length == 0">Publica juegos para ver estadisticas</p>
+            <div class="chart-container" style="width: 100%;">
+              <canvas id="MyChart"></canvas>
             </div>
+            </div>
+          </div>
           </div>
         </div>
       </div>

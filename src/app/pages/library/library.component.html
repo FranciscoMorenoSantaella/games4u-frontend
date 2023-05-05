@@ -8,11 +8,11 @@
               <h1 class="text-center">Todavía no tienes ningún juego</h1>
               <a class="text-center btn btn-outline-primary btn-sm w-100"  href="/juegos"> Ir a ver juegos</a>
             </div>
-            <div  *ngFor="let game of gamelist" class="row mt-2">
+            <div  *ngFor="let game of gamelist" style="display: flex; align-items: center;" class="row mt-2">
               <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
                 <div class="bg-image hover-zoom ripple rounded ripple-surface">
                   <div *ngFor="let file of game.files">
-                  <img *ngIf="file.executable==false || file.executable==null" style="max-height: 300px;" src="http://localhost:8080/file/files/{{file.uniquename}} "
+                  <img *ngIf="file.executable==false || file.executable==null" src="http://localhost:8080/file/files/{{file.uniquename}} "
                     class="w-100" />
                   </div>
                   <a href="#!">
@@ -43,10 +43,11 @@
                 </div>
                 </div>
               </div>
-              
+              <hr class="mt-4">
             </div>
           </div>
         </div>
+        
         <nav aria-label="...">
           <ul class="pagination justify-content-center justify-content-md-end">
             <li  class="page-item disabled">

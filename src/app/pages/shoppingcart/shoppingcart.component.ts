@@ -32,6 +32,7 @@ export class ShoppingcartComponent {
     await this.getLastShoppingCartIdNotPayedByClientId(this.user!.id);
     await this.getOrderByShoppingCartId(this.shoppingcartid);
     await this.getTotalPrice();
+    console.log(this.orderlist);
     this.loadingservice.hide();
   }
 
@@ -76,12 +77,6 @@ export class ShoppingcartComponent {
       this.storage.setSession(this.user);
     }
 
-    /**
-     * IMPORTANTE HACER QUE CUANDO SE VA A PAGAR EL CARRO DE LA COMPRA LLAMAR A GETUSER PARA COMPROBAR QUE SU SALDO ESTE BIEN
-     * Y LUEGO VOLVER A LLAMAR A GETUSER PARA ESTABLECER EL STORAGE POR SI LUEGO VA A SU PERFIL QUE SE VEA ACTUALIZADO EL SALDO ESTO MAÑANA
-     */
-
-
     async payShoppingCart(){
       this.loadingservice.show();
       await this.getOrderByShoppingCartId(this.shoppingcartid);
@@ -110,5 +105,9 @@ export class ShoppingcartComponent {
       }
       await this.getUser();
       this.loadingservice.hide();
+    }
+
+    async removeFromShoppingCart(index:number){
+      this.orderlist.splice(index,1);
     }
 }

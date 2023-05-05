@@ -26,7 +26,8 @@ import { MatToolbarModule} from '@angular/material/toolbar';
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatButtonModule} from '@angular/material/button';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { ShoppingcartComponent } from './pages/shoppingcart/shoppingcart.component'
+import { ShoppingcartComponent } from './pages/shoppingcart/shoppingcart.component';
+import { StadisticsComponent } from './pages/stadistics/stadistics.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +45,7 @@ import { ShoppingcartComponent } from './pages/shoppingcart/shoppingcart.compone
     GameComponent,
     ProfileComponent,
     ShoppingcartComponent,
+    StadisticsComponent,
   ],
   imports: [
     BrowserModule,
