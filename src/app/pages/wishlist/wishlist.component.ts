@@ -108,12 +108,8 @@ async isGameInShoppingCart(game_id:number){
    */
   async changePage(num:number){
     this.loadingservice.show();
-    this.gamelist = await this.gameservice.getGamesFromLibrary(
-      num,
-      this.gamesperpage,
-      4
-      );
     this.actualpage = num;
+    this.getGamesFromWishlist();
     this.loadingservice.hide();
   }
 

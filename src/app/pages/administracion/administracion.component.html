@@ -4,15 +4,10 @@
       <div class="col-md-12 col-xl-10">
         <div class="card shadow-0 border rounded-3">
           <div class="card-body">
-            <div *ngIf="count == 0">
-              <h1 class="text-center">Todavía no tienes ningún juego</h1>
-              <a class="text-center btn btn-outline-primary btn-sm w-100"  href="/juegos"> Ir a ver juegos</a>
+            <div *ngIf="gamelist.length == 0">
+              <h1 class="text-center">No hay mas juegos por verificar</h1>
             </div>
-            <div *ngIf="gamelist.length == 0 && count!=0">
-              <h1 class="text-center">No tienes mas juegos</h1>
-              <a class="text-center btn btn-outline-primary btn-sm w-100"  href="/juegos"> Ir a ver juegos</a>
-            </div>
-            <div  *ngFor="let game of gamelist" style="display: flex; align-items: center;" class="row mt-2">
+            <div  *ngFor="let game of gamelist; let i = index" style="display: flex; align-items: center;" class="row mt-2">
               <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
                 <div class="bg-image hover-zoom ripple rounded ripple-surface">
                   <div *ngFor="let file of game.files">
@@ -29,12 +24,11 @@
               <div class="col-md-6 col-lg-6 col-xl-6">
                 <h3>{{game.name}}</h3>
                 <div class="mt-4 mb-0 text-muted small">
-                  Género: <a *ngFor="let genre of game.genreslist">{{genre.name}}</a>
+                  <a *ngFor="let genre of game.genreslist">{{genre.name}}</a>
                 </div>
                 <div class="mt-4 mb-2 text-muted small">
-                  Plataformas:
-                  <a *ngFor="let platform of game.platforms; let last = last">{{ platform.name }}{{ last ? '' : ' ' }}</a>
-                </div>                
+                  <a *ngFor="let platform of game.platforms">{{platform.name}}</a>
+                </div>
                 <p class="mb-2 mt-4 mb-md-0">
                   {{game.description}}
                 </p>
@@ -45,6 +39,8 @@
                   <button *ngIf="file.executable==true" (click)="download(file.uniquename,file.originalname)" class="btn btn-outline-primary btn-sm w-100" type="button">
                     Descargar
                   </button>
+                  <button (click)="verifyGame(game,i)" *ngIf="file.executable==true" class="btn btn-outline-success btn-sm w-50 mt-2">Verificar</button> 
+                  <button (click)="rejectVerfiedGame(game,i)" *ngIf="file.executable==true" class="btn btn-outline-danger btn-sm w-50 mt-2">Rechazar</button>
                 </div>  
                 </div>
               </div>

@@ -47,6 +47,24 @@ export class AlertService {
       return result.isConfirmed; // Devuelve true si el usuario hizo clic en "Aceptar", false si hizo clic en "Cancelar" o cerró la alerta
     });
   }
-  
+
+  showSendEmailAlert():Promise<string> {
+    // Crear una nueva promesa
+    return new Promise((resolve) => {
+      // Mostrar una alerta con un campo de entrada
+      Swal.fire({
+        title: 'Motivo por el que se rechaza el juego',
+        input: 'text',
+        inputPlaceholder: 'Escribe el motivo',
+      }).then((result) => {
+        // result.value contendrá el valor ingresado por el usuario
+        const motivo = result.value;
+        // Resolver la promesa con el valor ingresado
+        resolve(motivo);
+      });
+    });
+  }
+
+
+
 }
-  

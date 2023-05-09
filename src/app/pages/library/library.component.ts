@@ -15,26 +15,31 @@ export class LibraryComponent {
   gamelist:Game[] = [];
   actualpage:number = 0;
   gamesperpage:number = 5;
-  user?:User;
+  user!:User;
+  count:number = 0;
   constructor(private gameservice:GameService,private loadingservice:LoadingService,
     private storage:StorageService, private router:Router, private http:HttpClient){
 
   }
 
  async ngOnInit(){
-    this.getGamesFromLibrary();
+    this.loadingservice.show();
+    this.loadingservice.timeout(5000);
     this.user = await this.storage.getSession();
-    console.log(this.user)
+    await this.getGamesFromLibrary();
+    await this.haveGamesInLibrary();
+    this.loadingservice.hide();
   }
   
   /**
    * Metodo que trae los juegos de la biblioteca del usuario
    */
   async getGamesFromLibrary(){
-    this.loadingservice.show();
-    this.gamelist = await this.gameservice.getGamesFromLibrary(0,this.gamesperpage,7 );
-    console.log(this.gamelist);
-    this.loadingservice.hide();
+    try {
+      this.gamelist = await this.gameservice.getGamesFromLibrary(this.actualpage,this.gamesperpage,this.user!.id );
+    } catch (error) {
+      
+    }
   } 
 
   /**
@@ -62,29 +67,43 @@ export class LibraryComponent {
    * @param num El numero de la pagina a la que vamos a cambiar
    */
   async changePage(num:number){
-    this.loadingservice.show();
-    this.gamelist = await this.gameservice.getGamesFromLibrary(
-      num,
-      this.gamesperpage,
-      4
-      );
-    this.actualpage = num;
-    this.loadingservice.hide();
+    try {
+      this.loadingservice.show();
+      this.gamelist = await this.gameservice.getGamesFromLibrary(
+        num,
+        this.gamesperpage,
+        this.user!.id
+        );
+      this.actualpage = num;
+      this.loadingservice.hide();
+    } catch (error) {
+      
+    }
   }
 
   download(uniquename:string,originalname:string) {
-    const url = 'http://localhost:8080/file/files/';
-    this.http.get(url + uniquename, { responseType: 'blob' }).subscribe((blob) => {
-      const downloadUrl = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = downloadUrl;
-      link.download = originalname;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    });
+    try {
+      const url = 'http://localhost:8080/file/files/';
+      this.http.get(url + uniquename, { responseType: 'blob' }).subscribe((blob) => {
+        const downloadUrl = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+        link.download = originalname;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    } catch (error) {
+      
+    }
   }
-  
 
-
+  async haveGamesInLibrary(){
+    try {
+      this.count = await this.gameservice.haveGamesInLibrary(this.user!.id);
+    } catch (error) {
+      
+    }
+  }
 }
+

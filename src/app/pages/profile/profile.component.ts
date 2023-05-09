@@ -52,7 +52,6 @@ export class ProfileComponent {
       data.push(sells);
     }
     const labels = this.gamelist.map(game => game.name);
-    console.log(labels);
     const colors = this.generateColors(data.length)
       this.chart = new Chart("MyChart", {
         type: 'doughnut', //this denotes tha type of chart

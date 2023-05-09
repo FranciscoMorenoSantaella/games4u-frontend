@@ -150,6 +150,19 @@ export class GameService {
     });
   }
 
+  public getPublisherByGameId(game_id:number): Promise<string> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .get(this.endpoint + "getpublisherbygameid/" + game_id)
+          .toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
   /**
    * Metodo que comprueba si un juego esta en la biblioteca de un usuario
    * @param user_id es id del usuario del que se va a comprobar si el juego esta en su biblioteca
@@ -197,6 +210,46 @@ export class GameService {
     });
   }
 
+  public getGamesNotVerified(page: Number, limit: Number): Promise<Game[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .get(this.endpoint + 'getgamesnotverified/' + page + '/' + limit)
+          .toPromise();
+        let gamelist = result.content;
+        resolve(gamelist);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  public setGameVerified(game_id:number): Promise<boolean>{
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .put(this.endpoint + 'setgameverified/' + game_id,{})
+          .toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  public setGameVerifiedNull(game_id:number): Promise<boolean>{
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .put(this.endpoint + 'setgameverifiednull/' + game_id,{})
+          .toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
   public getSalesByPayDate(game_id:number): Promise<Object[]> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -215,6 +268,19 @@ export class GameService {
       try {
         let result: any = await this.http
           .get(this.endpoint + 'getsalesbygameid/' + game_id)
+          .toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  public haveGamesInLibrary(user_id:number):Promise<number>{
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .get(this.endpoint + 'havegamesinlibrary/' + user_id)
           .toPromise();
         resolve(result);
       } catch (error) {

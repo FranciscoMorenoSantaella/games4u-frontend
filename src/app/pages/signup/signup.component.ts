@@ -2,8 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
+import { AlertService } from 'src/app/services/alert.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoadingService } from 'src/app/services/loading.service';
+import { StorageService } from 'src/app/services/storage.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -17,7 +19,9 @@ export class SignupComponent {
     
   
     formSignUp:FormGroup;
-    constructor(private authservice:AuthService, private fb: FormBuilder,private loadingservice:LoadingService,private userservice:UserService, private router:Router){
+    constructor(private authservice:AuthService, private fb: FormBuilder,private loadingservice:LoadingService,
+      private userservice:UserService, private router:Router,private alertservice:AlertService,
+      private storage:StorageService){
       this.formSignUp = this.fb.group({
         name: ['', [Validators.required,Validators.minLength(4)]],
         email: [
@@ -36,8 +40,6 @@ export class SignupComponent {
 
 
     ngOnInit(){
-    
-      this.signUp();
     }
 
 
@@ -53,16 +55,15 @@ export class SignupComponent {
             admin: false,
             balance:0
           }
-          console.log(newUser);
          let user = await this.userservice.createUser(newUser);
          if(user!=null){
-           //this.storage.set('client',client);
+           this.storage.setSession(user);
            this.router.navigate(['juegos']);
          }else{
-           //this.alertservice.presentToast("Error al crear el usuario en la base de datos","danger");
+           this.alertservice.showErrorMessage("Error al crear el usuario en la base de datos");
          }
       }else{
-        //this.alertservice.presentToast("Los datos del formulario no son validos","danger");
+        this.alertservice.showErrorMessage("Los datos del formulario no son validos");
       }
     }
 }

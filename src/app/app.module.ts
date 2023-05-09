@@ -27,7 +27,9 @@ import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatButtonModule} from '@angular/material/button';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ShoppingcartComponent } from './pages/shoppingcart/shoppingcart.component';
-import { StadisticsComponent } from './pages/stadistics/stadistics.component'
+import { StadisticsComponent } from './pages/stadistics/stadistics.component';
+import { AdministracionComponent } from './pages/administracion/administracion.component';
+import { LoadingComponent } from './pages/loading/loading.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +48,8 @@ import { StadisticsComponent } from './pages/stadistics/stadistics.component'
     ProfileComponent,
     ShoppingcartComponent,
     StadisticsComponent,
+    AdministracionComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,

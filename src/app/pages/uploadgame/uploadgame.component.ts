@@ -38,19 +38,12 @@ export class UploadgameComponent {
     return this.gameForm.get('image') as FormControl
   }
   
-  
-  
-  
-  
-
   constructor(private genreservice: GenreService, private platformservice: PlatformService, private fb: FormBuilder) {
     this.gameForm = this.fb.group({
       name: [
         '',
         [
           Validators.required,Validators.minLength(4),Validators.maxLength(32)
-          
-
         ],
       ],
       description: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(255)]],
@@ -80,7 +73,6 @@ export class UploadgameComponent {
    */
   async loadPlatforms() {
     this.platformlist = await this.platformservice.getAllPlatforms();
-    console.log(this.platformlist);
   }
 
   async uploadGame(){

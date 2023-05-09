@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/User';
 import { GameService } from 'src/app/services/game.service';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -9,17 +10,19 @@ import { StorageService } from 'src/app/services/storage.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+  user?:User;
   logout = false;
   constructor(private gameservice:GameService,private storage:StorageService, private router:Router){
 
   }
 
   async ngOnInit(){
-    await this.showLogout();
+     this.showLogout();
+     this.getUser();
   }
 
-  async showLogout(){
-    if(await this.storage.getSession() == null){
+   showLogout(){
+    if(this.storage.getSession() == null){
       this.logout = false;
     }else{
       this.logout = true;
@@ -31,6 +34,14 @@ export class NavbarComponent {
     this.storage.clearSession();
     this.router.navigate(['']);
     this.logout = false;
+  }
+
+  async getUser(){
+    try {
+      this.user = this.storage.getSession();
+    } catch (error) {
+      
+    }
   }
 
 }

@@ -37,7 +37,7 @@
               <p class="lead fw-normal">Gráfico de ventas</p>
               <div class="p-4" style="background-color: #f8f9fa;">
               <p class="text-center" *ngIf="gamelist.length == 0">Publica juegos para ver estadisticas</p>
-            <div class="chart-container" style="width: 100%;">
+            <div *ngIf="gamelist.length != 0" class="chart-container" style="width: 100%;">
               <canvas id="MyChart"></canvas>
             </div>
             </div>

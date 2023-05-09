@@ -12,6 +12,7 @@ import { GameComponent } from './pages/game/game.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ShoppingcartComponent } from './pages/shoppingcart/shoppingcart.component';
 import { StadisticsComponent } from './pages/stadistics/stadistics.component';
+import { AdministracionComponent } from './pages/administracion/administracion.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -25,7 +26,8 @@ const routes: Routes = [
   {path:'biblioteca', component:LibraryComponent},
   {path:'carro', component:ShoppingcartComponent},
   {path:'publicar', component:UploadgameComponent},
-  {path:'estadisticas/:id', component:StadisticsComponent}
+  {path:'estadisticas/:id', component:StadisticsComponent},
+  {path:'administracion',component:AdministracionComponent}
 ];
 
 @NgModule({
