@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { Route, Router } from '@angular/router';
 import { StorageService } from 'src/app/services/storage.service';
+import { AlertService } from 'src/app/services/alert.service';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -12,7 +13,9 @@ import { StorageService } from 'src/app/services/storage.service';
 export class SigninComponent {
 
   formLogin: FormGroup;
-  constructor(private authservice: AuthService, private fb: FormBuilder, private userservice: UserService, private router: Router, private storage:StorageService) {
+  constructor(private authservice: AuthService, private fb: FormBuilder, private userservice: UserService, 
+    private router: Router, private storage:StorageService,
+    private alertservice:AlertService) {
 
     this.formLogin = this.fb.group({
       email: [
@@ -24,25 +27,29 @@ export class SigninComponent {
           ),
         ],
       ],
-      password: ['', [Validators.required, Validators.minLength(4)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
   async signIn() {
-   
     if (this.formLogin.valid) {
       try {
         let result = await this.authservice.signIn(this.formLogin.get('email')!.value, this.formLogin.get('password')!.value);
-        if (result && result.user) {
+        if (result != null) {
           let user = await this.userservice.getUserByUid(result.user.uid);
-          this.storage.setSession(user);
-          this.router.navigate(['biblioteca']);
+          if (user != null) {
+            this.storage.setSession(user);
+            this.router.navigate(['biblioteca']);
+          } else {
+            this.alertservice.showErrorMessage("Error en la base de datos");
+          }
         } else {
-          console.log("result o result.user es nulo o indefinido");
+          this.alertservice.showErrorMessage("Error con firebase");
         }
-      } catch (error) {
-        console.log(error);
+      } catch (error: any) {
+          this.alertservice.showErrorMessage(error.message);
+        }
       }
     }
   }
-}
+

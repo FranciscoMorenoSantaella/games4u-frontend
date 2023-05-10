@@ -40,6 +40,7 @@ export class StadisticsComponent {
     const fechas = this.ventas.map((v: any[]) => v[1]);
     const sell = this.ventas.map((v: any[]) => v[0]);
     console.log(fechas);
+    console.log(sell);
     this.chart = new Chart("MyChart", {
       type: 'line', //this denotes tha type of chart
 

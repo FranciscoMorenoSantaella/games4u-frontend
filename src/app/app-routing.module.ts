@@ -13,12 +13,13 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { ShoppingcartComponent } from './pages/shoppingcart/shoppingcart.component';
 import { StadisticsComponent } from './pages/stadistics/stadistics.component';
 import { AdministracionComponent } from './pages/administracion/administracion.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
   {path:'search',component:SearchComponent},
-  {path:'signin', component:SigninComponent},
-  {path:'signup', component:SignupComponent},
+  {path:'signin', component:SigninComponent, canActivate: [AuthGuard]},
+  {path:'signup', component:SignupComponent, canActivate: [AuthGuard]},
   {path:'perfil', component:ProfileComponent},
   {path:'juego/:id', component:GameComponent},
   {path:'juegos', component:GameslistComponent},

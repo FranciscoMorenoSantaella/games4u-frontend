@@ -46,31 +46,34 @@ export class ProfileComponent {
 
     async createChart(){
     const data = [];
-    for (let i = 0; i < this.gamelist.length; i++) {
-      const game_id = this.gamelist[i].id;
-      let sells = await this.getSalesByGameId(game_id);
-      data.push(sells);
+    if(this.gamelist.length != 0) {
+      for (let i = 0; i < this.gamelist.length; i++) {
+        const game_id = this.gamelist[i].id;
+        let sells = await this.getSalesByGameId(game_id);
+        data.push(sells);
+      }
+      const labels = this.gamelist.map(game => game.name);
+      const colors = this.generateColors(data.length)
+        this.chart = new Chart("MyChart", {
+          type: 'doughnut', //this denotes tha type of chart
+    
+          data: {// values on X-Axis
+            labels: labels, 
+             datasets: [
+              {
+                label: "ventas",
+                data: data,
+                backgroundColor: colors
+              },
+            ]
+          },
+          options: {
+            aspectRatio:1.5,
+            responsive: true,
+          }
+        });
     }
-    const labels = this.gamelist.map(game => game.name);
-    const colors = this.generateColors(data.length)
-      this.chart = new Chart("MyChart", {
-        type: 'doughnut', //this denotes tha type of chart
   
-        data: {// values on X-Axis
-          labels: labels, 
-           datasets: [
-            {
-              label: "ventas",
-              data: data,
-              backgroundColor: colors
-            },
-          ]
-        },
-        options: {
-          aspectRatio:1.5,
-          responsive: true,
-        }
-      });
     }
 
     /**

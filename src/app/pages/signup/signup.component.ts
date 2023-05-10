@@ -33,7 +33,7 @@ export class SignupComponent {
             ),
           ],
         ],
-        password: ['', [Validators.required, Validators.minLength(4)]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
       });
 
     }
@@ -43,27 +43,51 @@ export class SignupComponent {
     }
 
 
-    async signUp(){
-      if(this.formSignUp.valid){
-          let result = await this.authservice.signUp(this.formSignUp.get('email')!.value,
-          this.formSignUp.get('password')!.value)
-          let newUser:User = {
+    async signUp() {
+      if (this.formSignUp.valid) {
+        let user: User | null = null;
+        let result: any;
+        
+        try {
+          result = await this.authservice.signUp(
+            this.formSignUp.get('email')!.value,
+            this.formSignUp.get('password')!.value
+          );
+          console.log(result);
+    
+          const newUser: User = {
             id: -1,
             name: this.formSignUp.get('name')!.value,
             email: this.formSignUp.get('email')!.value,
             uid: result.user.uid,
             admin: false,
-            balance:0
+            balance: 0,
+          };
+    
+          user = await this.userservice.createUser(newUser);
+    
+          if (!user) {
+            throw new Error('Error al crear el usuario en la base de datos');
           }
-         let user = await this.userservice.createUser(newUser);
-         if(user!=null){
-           this.storage.setSession(user);
-           this.router.navigate(['juegos']);
-         }else{
-           this.alertservice.showErrorMessage("Error al crear el usuario en la base de datos");
-         }
-      }else{
-        this.alertservice.showErrorMessage("Los datos del formulario no son validos");
+        } catch (error: any) {          
+          if (error.code === 'auth/email-already-in-use') {
+            this.alertservice.showErrorMessage('El correo electrónico ya está en uso');
+          } else {
+            this.alertservice.showErrorMessage('No se ha podido establecer la conexión con la base de datos');
+          }
+        } finally {
+          if (user) {
+            this.storage.setSession(user);
+            this.router.navigate(['juegos']);
+          } else {
+            // Deshacer la creación del usuario en Firebase
+            await this.authservice.deleteUser(result.user.uid);
+          }
+        }
+      } else {
+        this.alertservice.showErrorMessage('Los datos del formulario no son válidos');
       }
     }
+    
+    
 }

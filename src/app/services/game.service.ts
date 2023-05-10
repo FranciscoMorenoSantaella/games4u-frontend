@@ -154,8 +154,9 @@ export class GameService {
     return new Promise(async (resolve, reject) => {
       try {
         let result: any = await this.http
-          .get(this.endpoint + "getpublisherbygameid/" + game_id)
+          .get(this.endpoint + "getpublisherbygameid/" + game_id,{responseType: 'text'})
           .toPromise();
+        
         resolve(result);
       } catch (error) {
         reject(error);

@@ -79,15 +79,11 @@ export class AdministracionComponent {
     }
   }
 
-  async verifyGame(game:Game, index: number) {
-    console.log("entro");
+  async verifyGame(game: Game, index: number) {
     try {
-      console.log(await this.alertservice.showConfirmAlert("¿Estás seguro de que quieres verificar el juego?"));
       if (await this.alertservice.showConfirmAlert("¿Estás seguro de que quieres verificar el juego?")) {
         this.loadingservice.show();
         let email = await this.gameservice.getPublisherByGameId(game.id);
-        console.log(email);
-        console.log("entro");
         let emailissended = await this.sendemail(email, "El juego ha sido verificado", "Tu juego ha sido verificado correctamente");
         if (emailissended) {
           let aux = await this.gameservice.setGameVerified(game.id);
@@ -117,14 +113,14 @@ export class AdministracionComponent {
   }
 
 
-  async rejectVerfiedGame(game:Game, index: number) {
+  async rejectVerfiedGame(game: Game, index: number) {
     this.loadingservice.show();
     try {
       if (await this.alertservice.showConfirmAlert("¿Estás seguro de que quieres rechazar el juego?")) {
         let motivo = await this.alertservice.showSendEmailAlert();
-
         if (motivo != "") {
-          let emailissended = await this.sendemail("santaellamorenofrancisco@gmail.com", "Tu juego ha sido rechazado", motivo);
+          let email = await this.gameservice.getPublisherByGameId(game.id);
+          let emailissended = await this.sendemail(email, "Tu juego ha sido rechazado", motivo);
           if (emailissended) {
             console.log(emailissended);
             let aux = await this.gameservice.setGameVerifiedNull(game.id);

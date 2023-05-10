@@ -19,6 +19,7 @@ import { GameComponent } from './pages/game/game.component';
 import { AngularFireModule} from '@angular/fire/compat'
 import { environment } from 'src/enviroments/enviroment.prod';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AuthGuard } from '../app/auth.guard';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -64,7 +65,7 @@ import { LoadingComponent } from './pages/loading/loading.component'
     MatToolbarModule,
     MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
