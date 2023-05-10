@@ -37,28 +37,31 @@ export class StadisticsComponent {
   }
 
   async createChart(){
-    const fechas = this.ventas.map((v: any[]) => v[1]);
-    const sell = this.ventas.map((v: any[]) => v[0]);
-    console.log(fechas);
-    console.log(sell);
-    this.chart = new Chart("MyChart", {
-      type: 'line', //this denotes tha type of chart
-
-      data: {// values on X-Axis
-        labels: fechas, 
-	       datasets: [
-          {
-            label: "ventas",
-            data: sell,
-            backgroundColor: 'blue'
-          },
-        ]
-      },
-      options: {
-        aspectRatio:2.5
-      }
-      
-    });
+    if(this.ventas.length != 0){
+      const fechas = this.ventas.map((v: any[]) => v[1]);
+      const sell = this.ventas.map((v: any[]) => v[0]);
+      this.chart = new Chart("MyChart", {
+        type: 'line', //this denotes tha type of chart
+  
+        data: {// values on X-Axis
+          labels: fechas, 
+           datasets: [
+            {
+              label: "ventas",
+              data: sell,
+              backgroundColor: 'red',
+              borderColor: 'rgb(75, 192, 192)',
+            },
+          ]
+        },
+        options: {
+          aspectRatio:2.5
+        }
+        
+      });
+    }else{
+      this.alertservice.showInfoMessage("Aún no tienes ventas");
+    }
   }
 
   async getGameById(){
