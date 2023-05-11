@@ -30,7 +30,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { ShoppingcartComponent } from './pages/shoppingcart/shoppingcart.component';
 import { StadisticsComponent } from './pages/stadistics/stadistics.component';
 import { AdministracionComponent } from './pages/administracion/administracion.component';
-import { LoadingComponent } from './pages/loading/loading.component'
+import { LoadingComponent } from './pages/loading/loading.component';
+import { NotfoundComponent } from './pages/notfound/notfound.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +52,7 @@ import { LoadingComponent } from './pages/loading/loading.component'
     StadisticsComponent,
     AdministracionComponent,
     LoadingComponent,
+    NotfoundComponent,
   ],
   imports: [
     BrowserModule,

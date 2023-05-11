@@ -14,21 +14,24 @@ import { ShoppingcartComponent } from './pages/shoppingcart/shoppingcart.compone
 import { StadisticsComponent } from './pages/stadistics/stadistics.component';
 import { AdministracionComponent } from './pages/administracion/administracion.component';
 import { AuthGuard } from './auth.guard';
+import { AuthGuard2 } from './auth.guard2';
+import { NotfoundComponent } from './pages/notfound/notfound.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
   {path:'search',component:SearchComponent},
   {path:'signin', component:SigninComponent, canActivate: [AuthGuard]},
   {path:'signup', component:SignupComponent, canActivate: [AuthGuard]},
-  {path:'perfil', component:ProfileComponent},
+  {path:'perfil', component:ProfileComponent, canActivate:[AuthGuard2]},
   {path:'juego/:id', component:GameComponent},
   {path:'juegos', component:GameslistComponent},
-  {path:'deseados', component:WishlistComponent},
-  {path:'biblioteca', component:LibraryComponent},
-  {path:'carro', component:ShoppingcartComponent},
-  {path:'publicar', component:UploadgameComponent},
-  {path:'estadisticas/:id', component:StadisticsComponent},
-  {path:'administracion',component:AdministracionComponent}
+  {path:'deseados', component:WishlistComponent, canActivate:[AuthGuard2]},
+  {path:'biblioteca', component:LibraryComponent, canActivate:[AuthGuard2]},
+  {path:'carro', component:ShoppingcartComponent, canActivate:[AuthGuard2]},
+  {path:'publicar', component:UploadgameComponent, canActivate:[AuthGuard2]},
+  {path:'estadisticas/:id', component:StadisticsComponent,canActivate:[AuthGuard]},
+  {path:'administracion',component:AdministracionComponent, canActivate:[AuthGuard]},
+  {path:'**',component:NotfoundComponent}
 ];
 
 @NgModule({

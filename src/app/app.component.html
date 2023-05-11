@@ -1,3 +1,11 @@
 <app-navbar></app-navbar>
-<mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading | async"></mat-progress-spinner>
+<div class="modal" [ngClass]="{ 'show': loading | async }">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <mat-progress-spinner [mode]="'indeterminate'"></mat-progress-spinner>
+        </div>
+      </div>
+    </div>
+  </div>
 <router-outlet></router-outlet>
