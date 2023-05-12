@@ -1,0 +1,6 @@
+.card-text {
+    white-space: nowrap; /* Evita el salto de línea */
+    overflow: hidden; /* Oculta el texto que sobresale del contenedor */
+    text-overflow: ellipsis; /* Agrega los puntos suspensivos al final */
+  }
+  

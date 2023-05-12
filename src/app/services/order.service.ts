@@ -46,4 +46,17 @@ export class OrderService {
       }
     });
   }
+
+  public deleteOrder(game_id:number,shoppingcart_id:number): Promise<number>{
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .delete(this.endpoint + 'deleteorder/' + game_id + '/' + shoppingcart_id)
+          .toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
 }

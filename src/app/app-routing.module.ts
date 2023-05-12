@@ -16,6 +16,7 @@ import { AdministracionComponent } from './pages/administracion/administracion.c
 import { AuthGuard } from './auth.guard';
 import { AuthGuard2 } from './auth.guard2';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
+import { AuthAdminGuard } from './auth.admin.guard';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -30,7 +31,7 @@ const routes: Routes = [
   {path:'carro', component:ShoppingcartComponent, canActivate:[AuthGuard2]},
   {path:'publicar', component:UploadgameComponent, canActivate:[AuthGuard2]},
   {path:'estadisticas/:id', component:StadisticsComponent,canActivate:[AuthGuard]},
-  {path:'administracion',component:AdministracionComponent, canActivate:[AuthGuard]},
+  {path:'administracion',component:AdministracionComponent, canActivate:[AuthAdminGuard]},
   {path:'**',component:NotfoundComponent}
 ];
 

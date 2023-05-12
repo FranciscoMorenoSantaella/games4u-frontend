@@ -4,17 +4,17 @@
       <div class="col-md-12 col-xl-10">
         <div class="card shadow-0 border rounded-3">
           <div class="card-body">
-            <div>
+            <div *ngIf="gamelist.length == 0">
               <h1 class="text-center">
                 No tienes ningún juego en tu lista de deseados
               </h1>
               <a class="text-center btn btn-outline-primary btn-sm w-100"  href="/juegos"> Ir a ver juegos</a>
             </div>
-            <div *ngFor="let game of gamelist" class="row mt-2">
+            <div style="display: flex; align-items: center;" *ngFor="let game of gamelist" class="row mt-2">
               <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
                 <div class="bg-image hover-zoom ripple rounded ripple-surface">
                   <div *ngFor="let file of game.files">
-                    <img *ngIf="file.executable==false" style="max-height: 300px;"
+                    <img  *ngIf="file.executable==false" style="max-height: 300px;"
                       src="http://localhost:8080/file/files/{{file.uniquename}} " class="w-100" />
                   </div>
                   <a href="#!">

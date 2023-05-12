@@ -251,6 +251,20 @@ export class GameService {
     });
   }
 
+  public deleteGameFromWishlist(game_id:number,user_id:number): Promise<number>{
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .delete(this.endpoint + 'deletefromwishlist/' + game_id + '/' + user_id)
+          .toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+
   public getSalesByPayDate(game_id:number): Promise<Object[]> {
     return new Promise(async (resolve, reject) => {
       try {

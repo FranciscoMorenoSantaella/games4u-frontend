@@ -16,7 +16,7 @@
               <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
                 <div class="bg-image hover-zoom ripple rounded ripple-surface">
                   <div *ngFor="let file of game.files">
-                  <img *ngIf="file.executable==false || file.executable==null" src="http://localhost:8080/file/files/{{file.uniquename}} "
+                  <img style="" *ngIf="file.executable==false || file.executable==null" src="http://localhost:8080/file/files/{{file.uniquename}} "
                     class="w-100" />
                   </div>
                   <a href="#!">

@@ -93,6 +93,7 @@ export class ShoppingcartComponent {
           }
 
           if(payed){
+            this.orderlist.splice(0, this.orderlist.length);
             this.alertservice.showSuccessMessage("La compra se ha realizado correctamente");
           }else{
             this.alertservice.showErrorMessage("Ha ocurrido un error y no se ha podido pagar, inténtalo mas tarde");

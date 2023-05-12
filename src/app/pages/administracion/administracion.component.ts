@@ -82,7 +82,6 @@ export class AdministracionComponent {
   async verifyGame(game: Game, index: number) {
     try {
       if (await this.alertservice.showConfirmAlert("¿Estás seguro de que quieres verificar el juego?")) {
-        this.loadingservice.show();
         let email = await this.gameservice.getPublisherByGameId(game.id);
         let emailissended = await this.sendemail(email, "El juego ha sido verificado", "Tu juego ha sido verificado correctamente");
         if (emailissended) {
@@ -101,7 +100,6 @@ export class AdministracionComponent {
     } catch (error) {
 
     }
-    this.loadingservice.hide();
   }
 
   async sendemail(toEmail: string, subject: string, body: string) {
@@ -114,7 +112,6 @@ export class AdministracionComponent {
 
 
   async rejectVerfiedGame(game: Game, index: number) {
-    this.loadingservice.show();
     try {
       if (await this.alertservice.showConfirmAlert("¿Estás seguro de que quieres rechazar el juego?")) {
         let motivo = await this.alertservice.showSendEmailAlert();
@@ -140,6 +137,5 @@ export class AdministracionComponent {
     } catch (error) {
 
     }
-    this.loadingservice.hide();
   }
 }
