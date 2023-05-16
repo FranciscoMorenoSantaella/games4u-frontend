@@ -17,6 +17,8 @@ import { AuthGuard } from './auth.guard';
 import { AuthGuard2 } from './auth.guard2';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { AuthAdminGuard } from './auth.admin.guard';
+import { GeneratecodesComponent } from './pages/generatecodes/generatecodes.component';
+import { AddbalanceComponent } from './pages/addbalance/addbalance.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -32,6 +34,8 @@ const routes: Routes = [
   {path:'publicar', component:UploadgameComponent, canActivate:[AuthGuard2]},
   {path:'estadisticas/:id', component:StadisticsComponent,canActivate:[AuthGuard]},
   {path:'administracion',component:AdministracionComponent, canActivate:[AuthAdminGuard]},
+  {path:'codigos',component:GeneratecodesComponent,canActivate:[AuthAdminGuard]},
+  {path:'añadir-saldo',component:AddbalanceComponent},
   {path:'**',component:NotfoundComponent}
 ];
 

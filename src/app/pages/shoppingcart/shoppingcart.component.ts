@@ -91,7 +91,6 @@ export class ShoppingcartComponent {
           for (let index = 0; index < this.orderlist.length; index++) {
             this.gameservice.addGameToLibrary(this.orderlist[index].game.id,this.user!.id);
           }
-
           if(payed){
             this.orderlist.splice(0, this.orderlist.length);
             this.alertservice.showSuccessMessage("La compra se ha realizado correctamente");

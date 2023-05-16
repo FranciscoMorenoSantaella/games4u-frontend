@@ -31,7 +31,9 @@ import { ShoppingcartComponent } from './pages/shoppingcart/shoppingcart.compone
 import { StadisticsComponent } from './pages/stadistics/stadistics.component';
 import { AdministracionComponent } from './pages/administracion/administracion.component';
 import { LoadingComponent } from './pages/loading/loading.component';
-import { NotfoundComponent } from './pages/notfound/notfound.component'
+import { NotfoundComponent } from './pages/notfound/notfound.component';
+import { AddbalanceComponent } from './pages/addbalance/addbalance.component';
+import { GeneratecodesComponent } from './pages/generatecodes/generatecodes.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +55,8 @@ import { NotfoundComponent } from './pages/notfound/notfound.component'
     AdministracionComponent,
     LoadingComponent,
     NotfoundComponent,
+    AddbalanceComponent,
+    GeneratecodesComponent,
   ],
   imports: [
     BrowserModule,
