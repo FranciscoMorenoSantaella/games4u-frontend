@@ -34,7 +34,7 @@
           </li>
           <li class="nav-item">
             <!--<i class="fa-solid fa-star"></i> -->
-            <a class="nav-link" *ngIf="user?.admin" href="administracion">Administración</a>
+            <a class="nav-link" *ngIf="user?.admin" href="verificar">Verificar</a>
           </li>
           <li class="nav-item">
             <!--<i class="fa-solid fa-star"></i> -->
@@ -51,6 +51,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link sign" *ngIf="logout == false" href="signup">Registrarse</a>
+          </li>
+          <li class="nav-item" *ngIf="logout">
+            <span class="nav-link"> {{user!.name}}</span>
           </li>
               <li class="nav-item" *ngIf="logout == true">
                 <a class="nav-link logout" (click)="closeSession()">Logout</a>

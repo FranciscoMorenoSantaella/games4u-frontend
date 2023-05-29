@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -6,12 +6,14 @@ import { User } from 'src/app/models/User';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Game } from 'src/app/models/Game';
+import { UserRating } from 'src/app/models/UserRating';
 @Component({
   selector: 'app-library',
   templateUrl: './library.component.html',
   styleUrls: ['./library.component.css']
 })
 export class LibraryComponent {
+  showRating = true;
   gamelist:Game[] = [];
   actualpage:number = 0;
   gamesperpage:number = 5;
@@ -37,10 +39,24 @@ export class LibraryComponent {
   async getGamesFromLibrary(){
     try {
       this.gamelist = await this.gameservice.getGamesFromLibrary(this.actualpage,this.gamesperpage,this.user!.id );
+      console.log(this.gamelist);
+      this.checkRating();
     } catch (error) {
       
     }
   } 
+  
+ checkRating(){
+  for(let game of this.gamelist){
+    if(game.ratings){
+      for(let ratings of game!.ratings){
+        if(ratings.user.id === this.user.id){
+          this.showRating = false;
+        }
+      }
+    }
+  }
+ }
 
   /**
    * Metodo que resta en 1 la pagina actual

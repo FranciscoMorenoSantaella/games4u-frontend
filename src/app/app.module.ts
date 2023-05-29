@@ -20,10 +20,13 @@ import { AngularFireModule} from '@angular/fire/compat'
 import { environment } from 'src/enviroments/enviroment.prod';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AuthGuard } from '../app/auth.guard';
+import { StarRatingModule } from 'angular-star-rating';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule} from '@angular/material/toolbar';
+import { MatIconModule} from '@angular/material/icon';
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatButtonModule} from '@angular/material/button';
 import { ProfileComponent } from './pages/profile/profile.component';
@@ -33,7 +36,9 @@ import { AdministracionComponent } from './pages/administracion/administracion.c
 import { LoadingComponent } from './pages/loading/loading.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { AddbalanceComponent } from './pages/addbalance/addbalance.component';
-import { GeneratecodesComponent } from './pages/generatecodes/generatecodes.component'
+import { GeneratecodesComponent } from './pages/generatecodes/generatecodes.component';
+import { RatingComponent } from './pages/rating/rating.component';
+import { PruebaComponent } from './pages/prueba/prueba.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,9 +62,13 @@ import { GeneratecodesComponent } from './pages/generatecodes/generatecodes.comp
     NotfoundComponent,
     AddbalanceComponent,
     GeneratecodesComponent,
+    RatingComponent,
+    PruebaComponent,
+
   ],
   imports: [
     BrowserModule,
+    StarRatingModule.forRoot(),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -69,7 +78,9 @@ import { GeneratecodesComponent } from './pages/generatecodes/generatecodes.comp
     BrowserAnimationsModule,
     MatButtonModule,
     MatToolbarModule,
-    MatProgressSpinnerModule
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

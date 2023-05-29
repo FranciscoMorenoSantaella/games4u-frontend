@@ -17,6 +17,12 @@
             Plataformas:
         <span *ngFor="let platform of game.platforms" class="badge bg-primary">{{platform.name}}</span>
           </div>
+
+          <div class="rating-container">
+            <span class="rating-label">Valoración:</span>
+            <mat-icon matTooltip="{{game.valoracion}} de 5 estrellas" *ngFor="let starIndex of getStarArray(5); let i = index" class="star-icon" [ngClass]="{ 'yellow-star': i < game.valoracion }">star</mat-icon>
+          </div>
+          
         <p class="card-text">Descripción: {{game.description}}</p>
         <a  (click)="addProductToOrder()" class="mb-2 btn btn-outline-primary btn-sm w-100">Añadir al carro de la compra</a>
         <a  class="btn btn-outline-primary btn-sm w-100">Añadir a la lista de deseados</a>

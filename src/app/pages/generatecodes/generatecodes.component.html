@@ -7,15 +7,15 @@
             <form>
               <div class="form-group">
                 <label for="amount">Saldo del código: </label>
-                <select class="form-control" id="amount">
-                  <option value="25">25€</option>
+                <select name="balance" [(ngModel)]="balance" class="form-control" id="amount">
+                  <option selected value="25">25€</option>
                   <option value="50">50€</option>
                   <option value="75">75€</option>
                   <option value="100">100€</option>
                 </select>
               </div>
               <div class="form-group text-center">
-                <button type="submit" class="btn btn-primary">Generar</button>
+                <button (click)="generateCode(balance)" type="submit" class="btn btn-primary">Generar</button>
               </div>
             </form>
           </div>

@@ -27,10 +27,17 @@
                 </div>
               </div>
               <div class="col-md-6 col-lg-6 col-xl-6">
+                <ng-container *ngFor="let rating of game.ratings">
+                  <app-rating *ngIf="rating.user?.id == user?.id" [valoracion]="rating.valoracion" [game]="game"></app-rating>
+                </ng-container>
+                <div *ngIf="showRating">
+                  <app-rating [game]="game" [vacio]="5" class="black-stars"></app-rating>
+                </div>
                 <h3>{{game.name}}</h3>
                 <div class="mt-4 mb-0 text-muted small">
                   Género: <a *ngFor="let genre of game.genreslist">{{genre.name}}</a>
                 </div>
+              
                 <div class="mt-4 mb-2 text-muted small">
                   Plataformas:
                   <a *ngFor="let platform of game.platforms; let last = last">{{ platform.name }}{{ last ? '' : ' ' }}</a>

@@ -1,0 +1,11 @@
+mat-icon {
+    cursor: pointer;
+}
+
+.checked {
+    color: yellow;
+}
+
+.unchecked {
+    color: black;
+}

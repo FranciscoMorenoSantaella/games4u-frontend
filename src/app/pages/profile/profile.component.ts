@@ -6,6 +6,7 @@ import { LoadingService } from 'src/app/services/loading.service';
 import { StorageService } from 'src/app/services/storage.service';
 import Chart from 'chart.js/auto';
 import chroma from 'chroma-js';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class ProfileComponent {
     sell:number = 0;
     arrayVentas:any;
     chart:any;
-    constructor(private storage:StorageService, private gameservice:GameService, private loadingservice:LoadingService){
+    constructor(private storage:StorageService, private gameservice:GameService, 
+      private loadingservice:LoadingService, private userservice:UserService){
 
     }
 
@@ -32,8 +34,9 @@ export class ProfileComponent {
       this.loadingservice.hide();
     }
 
-    showData(){
-      this.user = this.storage.getSession();
+    async showData(){
+      this.user = await this.userservice.getUserByUid(this.storage.getSession().uid);
+      this.storage.setSession(this.user);
     }
 
     async getGames(){

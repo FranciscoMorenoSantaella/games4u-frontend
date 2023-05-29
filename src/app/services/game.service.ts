@@ -189,7 +189,9 @@ export class GameService {
         let result: any = await this.http
           .get(this.endpoint + 'getgamesfromlibrary/' + page + '/' + limit + '/' + user_id)
           .toPromise();
+          console.log(result.content);
         let gamelist = result.content;
+        
         resolve(gamelist);
       } catch (error) {
         reject(error);

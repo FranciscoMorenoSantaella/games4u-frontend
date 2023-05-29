@@ -83,13 +83,13 @@ export class AdministracionComponent {
     try {
       if (await this.alertservice.showConfirmAlert("¿Estás seguro de que quieres verificar el juego?")) {
         let email = await this.gameservice.getPublisherByGameId(game.id);
-        let emailissended = await this.sendemail(email, "El juego ha sido verificado", "Tu juego ha sido verificado correctamente");
+        let emailissended = await this.sendemail(email, "El juego ha sido verificado", `Tu juego ${game.name} ha sido verificado correctamente`);
         if (emailissended) {
           let aux = await this.gameservice.setGameVerified(game.id);
 
           if (aux) {
             this.gamelist.splice(index, 1);
-            this.alertservice.showSuccessMessage("El juego se ha verificado correctamente");
+            this.alertservice.showSuccessMessage(`El juego ${game.name} se ha verificado correctamente`);
           } else {
             this.alertservice.showErrorMessage("Error al verificar el juego");
           }
@@ -115,9 +115,9 @@ export class AdministracionComponent {
     try {
       if (await this.alertservice.showConfirmAlert("¿Estás seguro de que quieres rechazar el juego?")) {
         let motivo = await this.alertservice.showSendEmailAlert();
-        if (motivo != "") {
+        if (motivo != "" && motivo != null) {
           let email = await this.gameservice.getPublisherByGameId(game.id);
-          let emailissended = await this.sendemail(email, "Tu juego ha sido rechazado", motivo);
+          let emailissended = await this.sendemail(email, `Tu juego ${game.name} ha sido rechazado`, `Por el siguiente motivo: ${motivo}`);
           if (emailissended) {
             console.log(emailissended);
             let aux = await this.gameservice.setGameVerifiedNull(game.id);

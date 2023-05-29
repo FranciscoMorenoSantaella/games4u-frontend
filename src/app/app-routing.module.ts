@@ -19,9 +19,11 @@ import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { AuthAdminGuard } from './auth.admin.guard';
 import { GeneratecodesComponent } from './pages/generatecodes/generatecodes.component';
 import { AddbalanceComponent } from './pages/addbalance/addbalance.component';
+import { PruebaComponent } from './pages/prueba/prueba.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
+  {path: 'prueba', component: PruebaComponent },
   {path:'search',component:SearchComponent},
   {path:'signin', component:SigninComponent, canActivate: [AuthGuard]},
   {path:'signup', component:SignupComponent, canActivate: [AuthGuard]},
@@ -32,8 +34,8 @@ const routes: Routes = [
   {path:'biblioteca', component:LibraryComponent, canActivate:[AuthGuard2]},
   {path:'carro', component:ShoppingcartComponent, canActivate:[AuthGuard2]},
   {path:'publicar', component:UploadgameComponent, canActivate:[AuthGuard2]},
-  {path:'estadisticas/:id', component:StadisticsComponent,canActivate:[AuthGuard]},
-  {path:'administracion',component:AdministracionComponent, canActivate:[AuthAdminGuard]},
+  {path:'estadisticas/:id', component:StadisticsComponent,canActivate:[AuthGuard2]},
+  {path:'verificar',component:AdministracionComponent, canActivate:[AuthAdminGuard]},
   {path:'codigos',component:GeneratecodesComponent,canActivate:[AuthAdminGuard]},
   {path:'añadir-saldo',component:AddbalanceComponent},
   {path:'**',component:NotfoundComponent}

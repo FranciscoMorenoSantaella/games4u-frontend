@@ -34,9 +34,14 @@ export class SigninComponent {
   async signIn() {
     if (this.formLogin.valid) {
       try {
-        let result = await this.authservice.signIn(this.formLogin.get('email')!.value, this.formLogin.get('password')!.value);
+        const email = this.formLogin.get('email')!.value;
+        const password = this.formLogin.get('password')!.value;
+  
+        let result = await this.authservice.signIn(email, password);
+  
         if (result != null) {
           let user = await this.userservice.getUserByUid(result.user.uid);
+  
           if (user != null) {
             this.storage.setSession(user);
             this.router.navigate(['biblioteca']);
@@ -46,10 +51,14 @@ export class SigninComponent {
         } else {
           this.alertservice.showErrorMessage("Error con firebase");
         }
-      } catch (error: any) {
-          this.alertservice.showErrorMessage(error.message);
+      } catch (error:any) {
+        if (error.code === "auth/wrong-password") {
+          this.alertservice.showErrorMessage("Contraseña incorrecta");
+        } else {
+          this.alertservice.showErrorMessage("Error de conexión");
         }
       }
     }
   }
+}  
 

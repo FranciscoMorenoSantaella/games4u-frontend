@@ -1,6 +1,7 @@
 import { Genre } from "./Genre"
 import { Platform } from "./Platform"
 import { File } from "./File";
+import { UserRating } from "./UserRating";
 
 export interface Game {
     id:number,
@@ -9,7 +10,9 @@ export interface Game {
     precio:Number,
     earlyaccess?:boolean,
     fechasalida?:any,
-    genreslist:Genre[]
-    platforms:Platform[];
-    files:File[];
+    valoracion:number,
+    ratings?:any[],
+    genreslist:Genre[],
+    platforms:Platform[],
+    files:File[]
 }

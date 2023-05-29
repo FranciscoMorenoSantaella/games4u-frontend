@@ -4,3 +4,23 @@
     text-overflow: ellipsis; /* Agrega los puntos suspensivos al final */
   }
   
+  .rating-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .rating-label {
+    margin-right: 10px;
+  }
+  
+  .star-icon {
+    color: black; /* Color inicial de las estrellas */
+    font-size: 24px;
+  }
+  
+  .yellow-star {
+    color: yellow; /* Color de las estrellas con valoración */
+  }
+  
+  
+  

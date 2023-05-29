@@ -40,6 +40,7 @@ export class GameComponent {
   async getGameById() {
     try {
       this.game = await this.gameservice.getGameById(this.id);
+      console.log(this.game);
     } catch (error) {
       this.alertservice.showErrorMessage("No se ha encontrado un juego con ese id");
     }
@@ -114,6 +115,9 @@ export class GameComponent {
     this.isinshoppingcart = await this.shoppingcartservice.isGameInShoppingCart(this.user.id,this.game.id);
   }
 
+  getStarArray(length: number): number[] {
+    return Array.from({ length });
+  }
   
 
 }
