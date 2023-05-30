@@ -8,11 +8,12 @@
                 <img src="../../../assets/images/guest.webp"
                   alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                   style="width: 150px; z-index: 1">
-                <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
-                  style="z-index: 1;">
-                  Edit profile
-                </button>
+          
+           
+                 
               </div>
+         
+              
               <div class="ms-3" style="margin-top: 130px;">
                 <h4>{{user?.name}} {{user?.balance}}€</h4>
                 <p>{{user?.email}}</p>
@@ -28,6 +29,22 @@
             </div>
             <div class="card-body p-4 text-black">
               <div class="mb-5">
+                <p class="lead fw-normal mb-1">Añadir saldo</p>
+                <div class="p-4" style="background-color: #f8f9fa;">
+                  <label for="exampleFormControlInput1">Cantidad</label>
+                  <input class="form-control mb-4" type="number" [(ngModel)]="cantidad" placeholder="Cantidad" />
+              <button (click)="makePayment()" class="paypal-button" >
+                <span class="paypal-button-title">
+                  Añade saldo
+                </span>
+                <span class="paypal-logo">
+                  <i>Pay</i><i>Pal</i>
+                </span>
+              </button>
+            </div>
+           
+            <div class="card-body p-4 text-black">
+              <div class="mb-5">
                 <p class="lead fw-normal mb-1">Juegos Publicados</p>
                 <div class="p-4" style="background-color: #f8f9fa;">
                   <p *ngFor="let game of gamelist " class="font-italic mb-1"><a href="estadisticas/{{game.id}}">{{game.name}}</a></p>
@@ -41,9 +58,14 @@
               <canvas id="MyChart"></canvas>
             </div>
             </div>
+          
+           
+          
           </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
   </section>

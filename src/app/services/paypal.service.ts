@@ -10,7 +10,7 @@ export class PaypalService {
 
   
 
-  public createPayment(price: number, currency: string, method: string, intent: string, description: string): Promise<any> {
+  public createPayment(price: number, currency: string, method: string, intent: string, description: string, user_id:number): Promise<any> {
     return new Promise(async (resolve, reject) => {
       try {
         const paymentData = {
@@ -18,11 +18,13 @@ export class PaypalService {
           currency: currency,
           method: method,
           intent: intent,
-          description: description
+          description: description,
+          user_id:user_id
+        
         };
   
         let response: any= await this.http
-          .post('http://localhost:8080/paypal/pay', paymentData, { observe: 'response', responseType: 'text' })
+          .post(`http://localhost:8080/pay`, paymentData, { observe: 'response', responseType: 'text' })
           .toPromise();
   
         if (response.status === 200) {

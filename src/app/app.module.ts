@@ -38,7 +38,8 @@ import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { AddbalanceComponent } from './pages/addbalance/addbalance.component';
 import { GeneratecodesComponent } from './pages/generatecodes/generatecodes.component';
 import { RatingComponent } from './pages/rating/rating.component';
-import { PruebaComponent } from './pages/prueba/prueba.component'
+import { PruebaComponent } from './pages/prueba/prueba.component';
+import { PaymentComponent } from './pages/payment/payment.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +65,7 @@ import { PruebaComponent } from './pages/prueba/prueba.component'
     GeneratecodesComponent,
     RatingComponent,
     PruebaComponent,
+    PaymentComponent,
 
   ],
   imports: [

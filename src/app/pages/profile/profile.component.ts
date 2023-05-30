@@ -7,6 +7,9 @@ import { StorageService } from 'src/app/services/storage.service';
 import Chart from 'chart.js/auto';
 import chroma from 'chroma-js';
 import { UserService } from 'src/app/services/user.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from 'src/app/services/alert.service';
+import { PaypalService } from 'src/app/services/paypal.service';
 
 
 @Component({
@@ -20,17 +23,32 @@ export class ProfileComponent {
     sell:number = 0;
     arrayVentas:any;
     chart:any;
+    cantidad:number = 0;
     constructor(private storage:StorageService, private gameservice:GameService, 
-      private loadingservice:LoadingService, private userservice:UserService){
-
+      private loadingservice:LoadingService, private userservice:UserService,
+      private route: ActivatedRoute, private router: Router, private alertservice:AlertService, private paypalService:PaypalService){
+       
     }
+
+
 
     async ngOnInit(){
       this.loadingservice.show();
+      this.route.queryParams.subscribe(params => {
+        const message = params['message'];
+        const success = params['success'];
+        if (success.toLowerCase() === "true") {
+          this.alertservice.showSuccessMessage(message);
+        } else {
+          this.alertservice.showErrorMessage(message);
+        }
+      
+      });
       await this.showData();
       await this.getGames();
       await this.getSellGames();
       await this.createChart();
+      
       this.loadingservice.hide();
     }
 
@@ -94,5 +112,24 @@ export class ProfileComponent {
       let sells = await this.gameservice.getSalesByGameId(game_id);
       return sells;
     }
+
+    async makePayment() {
+
+
+      if(this.user != null){
+    try {
+      if(this.cantidad > 0){
+      let url = await this.paypalService.createPayment(this.cantidad, 'EUR', 'paypal', 'sale', 'Payment description',this.user.id);
+      window.location.href = url;
+      }else{
+        this.alertservice.showErrorMessage("Introduce una cantidad valida");
+      }
+    } catch (error) {
+      console.log('Error:', error);
+    }
+  }else{
+    
+  }
+  }
   }
 

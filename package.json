@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^15.2.0",
     "@angular/platform-browser-dynamic": "^15.2.8",
     "@angular/router": "^15.2.8",
+    "@paypal/paypal-js": "^5.1.6",
     "angular-star-rating": "^6.0.0",
     "chart.js": "^4.3.0",
     "chroma-js": "^2.4.2",

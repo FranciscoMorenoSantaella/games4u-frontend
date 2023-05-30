@@ -20,10 +20,11 @@ import { AuthAdminGuard } from './auth.admin.guard';
 import { GeneratecodesComponent } from './pages/generatecodes/generatecodes.component';
 import { AddbalanceComponent } from './pages/addbalance/addbalance.component';
 import { PruebaComponent } from './pages/prueba/prueba.component';
+import { PaymentComponent } from './pages/payment/payment.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
-  {path: 'prueba', component: PruebaComponent },
+  {path: 'pago', component: PaymentComponent },
   {path:'search',component:SearchComponent},
   {path:'signin', component:SigninComponent, canActivate: [AuthGuard]},
   {path:'signup', component:SignupComponent, canActivate: [AuthGuard]},
