@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Game } from '../models/Game';
+import { Observable } from 'rxjs/internal/Observable';
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
 
-  endpoint: any = "http://localhost:8080/game/";
+  endpoint: any = "https://games4u.onrender.com/game/";
   constructor(private http:HttpClient){
 
   }
@@ -31,6 +32,33 @@ export class GameService {
       }
     });
   }
+
+  public getGamesByGenre(page: Number, limit: Number, genre_name:String): Promise<Game[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .get(this.endpoint + 'findbygenre/' + page + '/' + limit + '/' + genre_name)
+          .toPromise();
+        let gamelist = result.content;
+        resolve(gamelist);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+  public createGame(formData:FormData): Promise<any>{
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .post(this.endpoint + 'creategame/',formData)
+          .toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
 
   /**
    * Metodo en el que se busca juegos segun su nombre
@@ -305,5 +333,4 @@ export class GameService {
       }
     });
   }
-
 }

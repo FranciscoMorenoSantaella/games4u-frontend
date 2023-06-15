@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { LoadingService } from 'src/app/services/loading.service';
 import { Game } from 'src/app/models/Game';
 import { File } from 'src/app/models/File';
+import { GenreService } from 'src/app/services/genre.service';
+import { Genre } from 'src/app/models/Genre';
 @Component({
   selector: 'app-gameslist',
   templateUrl: './gameslist.component.html',
@@ -15,21 +17,41 @@ export class GameslistComponent {
     gamesearch:any;
     gamename:string = "";
     gamelist:Game[] = [];
+    genrelist:Genre[] = [];
     isshort = false;
-    constructor(private gameservice:GameService, private router:Router, private loadingservice:LoadingService){
+    selectedGenreId = 0;
+    constructor(private gameservice:GameService, private router:Router, private loadingservice:LoadingService, private genreservice:GenreService){
 
     }
 
     async ngOnInit() {
       this.cargarJuegos();
+      this.genrelist = await this.genreservice.getAllGenres();
+    }
+
+    async onGenreChange(event: any) {
+      this.selectedGenreId = event.target.value;
+      // Aquí puedes manejar la lógica para realizar acciones cuando cambie la opción seleccionada
+      if(this.selectedGenreId != 0){
+      this.gamelist = await this.gameservice.getGamesByGenre(0,4,this.selectedGenreId + "");
+      }else{
+        this.gamelist = await this.gameservice.getGamesByPage(this.actualpage,this.gameperpage);
+      }
+      this.actualpage = 0;
+      // Realiza cualquier acción adicional que necesites
     }
 
     async cargarJuegos(){
       this.loadingservice.show();
+      if(this.selectedGenreId == 0){
       this.gamelist = await this.gameservice.getGamesByPage(
         this.actualpage,
         this.gameperpage
         );
+        console.log(this.gamelist);
+      }else{
+        this.gamelist = await this.gameservice.getGamesByGenre(this.actualpage,this.gameperpage,this.selectedGenreId + "");
+      }
       this.loadingservice.hide();
     }
 

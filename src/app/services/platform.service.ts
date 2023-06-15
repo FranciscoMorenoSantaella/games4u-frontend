@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class PlatformService {
-  endpoint = "http://localhost:8080/platform/"
+  endpoint = "https://games4u.onrender.com/platform/"
   constructor(private http:HttpClient) { }
 
   /**

@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserService {
 
-  endpoint = "http://localhost:8080/user/"
+  endpoint = "https://games4u.onrender.com/user/"
   constructor(public http:HttpClient) { }
 
 

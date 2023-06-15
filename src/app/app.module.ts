@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -39,7 +39,11 @@ import { AddbalanceComponent } from './pages/addbalance/addbalance.component';
 import { GeneratecodesComponent } from './pages/generatecodes/generatecodes.component';
 import { RatingComponent } from './pages/rating/rating.component';
 import { PruebaComponent } from './pages/prueba/prueba.component';
-import { PaymentComponent } from './pages/payment/payment.component'
+import { PaymentComponent } from './pages/payment/payment.component';
+import { MatSelectModule } from '@angular/material/select';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,10 +85,11 @@ import { PaymentComponent } from './pages/payment/payment.component'
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
+    MatSelectModule,
     MatProgressSpinnerModule,
     MatTooltipModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, { provide: LOCALE_ID, useValue: 'en' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

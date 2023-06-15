@@ -6,14 +6,14 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class GenreService {
-  endpoint = "http://localhost:8080/genre/"
+  endpoint = "https://games4u.onrender.com/genre/"
   constructor(private http:HttpClient) { }
 
   /**
    * Metodo que devuelve una lista de generos
    * @returns una lista de generos
    */
-  public async getAllGenres():Promise<Genre> {
+  public async getAllGenres():Promise<Genre[]> {
     return new Promise(async (resolve, reject) => {
       try {
         let result: any = (await this.http
