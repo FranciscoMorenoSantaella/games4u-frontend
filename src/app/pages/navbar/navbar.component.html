@@ -7,10 +7,12 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <div class="d-flex" *ngIf="logout">
+         
           <li class="nav-item">
             <!--<i class="fa-solid fa-list"></i>-->
             <a class="nav-link active" i18n="@@biblioteca" aria-current="page" href="biblioteca"> Bilioteca</a>
           </li>
+          
           <li class="nav-item">
             <!--<i class="fa-solid fa-star"></i> -->
             <a class="nav-link" href="deseados">Lista de deseados</a>
@@ -23,7 +25,6 @@
             <!--<i class="fa-solid fa-star"></i> -->
             <a class="nav-link" href="perfil">Perfil</a>
           </li>
-        </div>
           <li class="nav-item">
             <!--<i class="fa-solid fa-star"></i> -->
             <a class="nav-link" href="juegos">Juegos</a>
@@ -32,6 +33,7 @@
             <!--<i class="fa-solid fa-star"></i> -->
             <a class="nav-link" href="añadir-saldo">Añadir saldo</a>
           </li>
+        </div>
           <li class="nav-item">
             <!--<i class="fa-solid fa-star"></i> -->
             <a class="nav-link" *ngIf="user?.admin" href="verificar">Verificar</a>

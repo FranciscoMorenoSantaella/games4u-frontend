@@ -1,12 +1,13 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Code } from '../models/Code';
+import { environment } from 'src/enviroments/enviroment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CodeService {
-  endpoint = "http://localhost:8080/code/";
+  endpoint = environment.endpoint1 + "/code/";
   constructor(private http:HttpClient) { }
 
   public generatecode(balance:number): Promise<Code>{

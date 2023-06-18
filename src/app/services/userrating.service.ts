@@ -1,13 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserRating } from '../models/UserRating';
+import { environment } from 'src/enviroments/enviroment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserratingService {
 
-  endpoint: any = "http://localhost:8080/userrating/";
+  endpoint = environment.endpoint1 + "/userrating/";
   constructor(private http:HttpClient){
 
   }

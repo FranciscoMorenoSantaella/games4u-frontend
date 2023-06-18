@@ -21,7 +21,7 @@ export class WishlistComponent {
   isinshoppingcart: any;
   gamelist: Game[] = [];
   actualpage: number = 0;
-  gamesperpage: number = 1;
+  gamesperpage: number = 4;
   user!: User;
   shoppingcartid: any;
   constructor(private gameservice: GameService, private loadingservice: LoadingService,
@@ -34,6 +34,8 @@ export class WishlistComponent {
     this.user = this.storage.getSession();
     this.getGamesFromWishlist();
   }
+
+  
 
   /**
    * Metodo que trae los juegos de la lista de deseados del usuario
@@ -59,11 +61,8 @@ export class WishlistComponent {
         }
         let funciona = await this.orderservice.postOrder(order);
         if (funciona != null) {
-          let row = await this.deleteGameFromWishlist(game_id, this.user.id);
-          console.log(row);
-          if (row == 1) {
-            this.alertservice.showSuccessMessage("Se ha añadido al carro correctamente");
-          }
+          this.deleteGameFromWishlist(game_id, this.user.id);
+          
         }
       } else {
         this.alertservice.showInfoMessage("Ya esta añadido al carro de la compra");
@@ -72,6 +71,24 @@ export class WishlistComponent {
       this.alertservice.showInfoMessage("Ya tienes este juego en tu biblioteca");
     }
   }
+
+  async deleteGameFromWishlist(game_id: number, user_id: number) {
+    const gameIndex = this.gamelist.findIndex(game => game.id === game_id);
+    let row = 0;
+  
+    if (gameIndex !== -1) {
+      let row = await this.gameservice.deleteGameFromWishlist(game_id, user_id);
+      if(row == 1){
+        this.alertservice.showSuccessMessage("Se ha añadido correctamente al carro de la compra");
+        this.gamelist.splice(gameIndex, 1);
+      }else{
+        this.alertservice.showErrorMessage("Error al eliminar de la lista de deseados");
+      }
+    }
+    return row;
+  }
+
+  
 
   async getLastShoppingCartIdNotPayedByUserId() {
     this.shoppingcartid = await this.shoppingcartservice.getLastShoppingCartIdNotPayedByUserId(this.user!.id);
@@ -85,9 +102,6 @@ export class WishlistComponent {
     this.isinshoppingcart = await this.shoppingcartservice.isGameInShoppingCart(this.user!.id, game_id);
   }
 
-  async deleteGameFromWishlist(game_id: number, user_id: number) {
-    return this.gameservice.deleteGameFromWishlist(game_id, user_id);
-  }
 
   /**
    * Metodo que resta en 1 la pagina actual

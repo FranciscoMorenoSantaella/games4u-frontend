@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
+import { environment } from 'src/enviroments/enviroment';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 export class PaypalService {
 
   constructor(private http: HttpClient) { }
-
+  endpoint = environment.endpoint1 + "/pay";
   
 
   public createPayment(price: number, currency: string, method: string, intent: string, description: string, user_id:number): Promise<any> {
@@ -24,7 +25,7 @@ export class PaypalService {
         };
   
         let response: any= await this.http
-          .post(`http://localhost:8080/pay`, paymentData, { observe: 'response', responseType: 'text' })
+          .post(this.endpoint, paymentData, { observe: 'response', responseType: 'text' })
           .toPromise();
   
         if (response.status === 200) {

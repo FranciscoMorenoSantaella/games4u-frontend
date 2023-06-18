@@ -26,7 +26,6 @@ export class LibraryComponent {
 
  async ngOnInit(){
     this.loadingservice.show();
-    this.loadingservice.timeout(5000);
     this.user = await this.storage.getSession();
     await this.getGamesFromLibrary();
     await this.haveGamesInLibrary();

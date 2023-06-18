@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Order } from 'src/app/models/Order';
 import { User } from 'src/app/models/User';
 import { AlertService } from 'src/app/services/alert.service';
+import { CodeService } from 'src/app/services/code.service';
 import { GameService } from 'src/app/services/game.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { OrderService } from 'src/app/services/order.service';
@@ -22,7 +23,7 @@ export class ShoppingcartComponent {
   orderlist:any;
   constructor(private shoppingcartservice:ShoppingcartService, private loadingservice:LoadingService, 
     private storage:StorageService, private orderservice:OrderService,private userservice:UserService,
-    private alertservice:AlertService, private gameservice:GameService){
+    private alertservice:AlertService, private gameservice:GameService, private codeservice:CodeService){
 
   }
 
@@ -32,7 +33,6 @@ export class ShoppingcartComponent {
     await this.getLastShoppingCartIdNotPayedByClientId(this.user!.id);
     await this.getOrderByShoppingCartId(this.shoppingcartid);
     await this.getTotalPrice();
-    console.log(this.orderlist);
     this.loadingservice.hide();
   }
 
@@ -82,7 +82,7 @@ export class ShoppingcartComponent {
       await this.getOrderByShoppingCartId(this.shoppingcartid);
       await this.getTotalPrice();
       this.loadingservice.hide();
-      let confirmed = await this.alertservice.showConfirmAlert("¿Estás seguro de que quieres realizar la compra? precio final " + this.precio);
+      let confirmed = await this.alertservice.showConfirmAlert(`¿Estás seguro de que quieres realizar la compra? precio final: ${this.precio}`);
       if(confirmed){
         this.loadingservice.show();
         await this.getUser();
@@ -91,9 +91,15 @@ export class ShoppingcartComponent {
           for (let index = 0; index < this.orderlist.length; index++) {
             this.gameservice.addGameToLibrary(this.orderlist[index].game.id,this.user!.id);
           }
+          
           if(payed){
-            this.orderlist.splice(0, this.orderlist.length);
             this.alertservice.showSuccessMessage("La compra se ha realizado correctamente");
+            if(this.precio >= 50){
+              let code = await this.codeservice.generatecode(5);
+              this.alertservice.showInfoMessage(`Has conseguido un codigo de 5€ ${code.code}`);
+            }
+            this.orderlist.splice(0, this.orderlist.length);
+
           }else{
             this.alertservice.showErrorMessage("Ha ocurrido un error y no se ha podido pagar, inténtalo mas tarde");
           }

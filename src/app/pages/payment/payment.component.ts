@@ -16,19 +16,5 @@ export class PaymentComponent {
     this.user = this.storage.getSession();
   }
 
-  async makePayment() {
 
-
-    if(this.user != null){
-  try {
-    let url = await this.paypalService.createPayment(150.0, 'USD', 'paypal', 'sale', 'Payment description',this.user.id);
-    alert(url);
-    window.location.href = url;
-  } catch (error) {
-    console.log('Error:', error);
-  }
-}else{
-  
-}
-}
 }

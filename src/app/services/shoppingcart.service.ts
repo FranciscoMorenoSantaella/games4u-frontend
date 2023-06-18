@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/enviroments/enviroment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingcartService {
-  endpoint = "http://localhost:8080/shoppingcart/"
+  endpoint = environment.endpoint1 + "/shoppingcart/";
   constructor(private http:HttpClient) { }
 
   /**

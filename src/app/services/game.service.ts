@@ -147,6 +147,19 @@ export class GameService {
     });
   }
 
+  public addGameToWishList(game_id:number,user_id:number): Promise<boolean> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .get(this.endpoint + 'addgametowishlist/' + game_id + '/' + user_id)
+          .toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
   /**
   * Metodo que trae los juegos que tiene comprados un usuario 
   * @param user_id es el id del usuario del que vamos a traer los juegos comprados
@@ -157,6 +170,19 @@ export class GameService {
       try {
         let result: any = await this.http
           .get(this.endpoint + 'getlibrarybyid/' + user_id)
+          .toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  public getPublisherIdByGameId(game_id:number): Promise<number> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .get(this.endpoint + 'getpublisheridbygameid/' + game_id)
           .toPromise();
         resolve(result);
       } catch (error) {

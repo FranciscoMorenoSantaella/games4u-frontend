@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/User';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/enviroments/enviroment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  endpoint = "https://games4u.onrender.com/user/"
+  endpoint = environment.endpoint1 + "/user/";
   constructor(public http:HttpClient) { }
 
 

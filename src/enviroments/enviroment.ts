@@ -1,5 +1,7 @@
 export const environment = {
     production: false,
+    endpoint1:"https://games4u.onrender.com",
+    endpoint2:"",
     secretKey:"micontraseña",
     firebaseConfig:{
         apiKey: "AIzaSyDpm1592mcf5XC70nW9OcSa5dY6TY6MD-I",

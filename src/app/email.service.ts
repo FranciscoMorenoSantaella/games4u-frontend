@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/enviroments/enviroment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmailService {
-  endpoint = "http://localhost:8080/email/";
+  endpoint = environment.endpoint1 + "/email/";
   constructor(private http:HttpClient) { }
 
   public sendEmail(toEmail: string, subject: string, body: string): Promise<Boolean> {

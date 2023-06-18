@@ -70,6 +70,8 @@ export class ProfileComponent {
     if(this.gamelist.length != 0) {
       for (let i = 0; i < this.gamelist.length; i++) {
         const game_id = this.gamelist[i].id;
+        let publisher = await this.gameservice.getPublisherIdByGameId(game_id);
+        console.log(publisher);
         let sells = await this.getSalesByGameId(game_id);
         data.push(sells);
       }

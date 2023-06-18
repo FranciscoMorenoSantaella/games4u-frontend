@@ -45,7 +45,7 @@
     <div *ngFor="let game of gamelist" class="col-12 col-sm-6 col-md-3">
       <div class="card" style="height:400px">
         <div *ngFor="let file of game.files">
-          <img *ngIf="file.executable==false" height="200px" src="http://localhost:8080/file/files/{{file.uniquename}}"
+          <img *ngIf="file.executable==false" height="200px" [src]="file.url"
             class="w-100" />
           </div>
         <div class="card-body">

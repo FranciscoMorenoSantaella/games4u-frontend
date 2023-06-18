@@ -118,6 +118,15 @@ export class GameComponent {
   getStarArray(length: number): number[] {
     return Array.from({ length });
   }
+
+  async addToWishList(){
+      let aux = await this.gameservice.addGameToWishList(this.game.id, this.user.id); 
+      if(aux){
+        this.alertservice.showSuccessMessage("Se ha añadido el juego correctamente a tu lista de deseados");
+      }else{
+        this.alertservice.showErrorMessage("No se ha añadido a la lista de deseados");
+      }
+  }
   
 
 }

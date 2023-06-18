@@ -2,7 +2,7 @@
 <div class="d-flex justify-content-center align-items-center">
     <div class="card col-md-8 col-12">
       <div *ngFor="let file of game.files">
-      <img *ngIf="file.executable==false" class="card-img-top" src="http://localhost:8080/file/files/{{file.uniquename}}" alt="Card image cap">
+      <img *ngIf="file.executable==false" class="card-img-top" [src]="file.url" alt="Card image cap">
       </div>
       <div class="card-body">
         <div>
@@ -25,7 +25,7 @@
           
         <p class="card-text">Descripción: {{game.description}}</p>
         <a  (click)="addProductToOrder()" class="mb-2 btn btn-outline-primary btn-sm w-100">Añadir al carro de la compra</a>
-        <a  class="btn btn-outline-primary btn-sm w-100">Añadir a la lista de deseados</a>
+        <a (click)="addToWishList()"  class="btn btn-outline-primary btn-sm w-100">Añadir a la lista de deseados</a>
       </div>
     </div>
   </div>

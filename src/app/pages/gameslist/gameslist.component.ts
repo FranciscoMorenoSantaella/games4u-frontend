@@ -87,8 +87,10 @@ export class GameslistComponent {
       this.loadingservice.hide();
       }else{
         this.isshort = true;
-        await new Promise(resolve => setTimeout(resolve, 5000));
+     
         this.isshort = false;
       } 
     }
+
+  
 }
