@@ -1,0 +1,28 @@
+{
+    "library": "library",
+    "wishlist": "wishlist",
+    "publish": "publish",
+    "profile": "profile",
+    "password":"password",
+    "name":"name",
+    "games": "games",
+    "addsalary": "add salary",
+    "verify":"verify",
+    "codes":"codes",
+    "signin":"sign in",
+    "signup":"sign up",
+    "logoutt":"logout",
+    "home1":"The website to buy and publish your video games",
+    "home2":"Get Started",
+    "home3":"Lear more",
+    "home4":"statistics",
+    "home5":"Publish your own video games and keep track of how sales are going thanks to our graphics",
+    "home6":"Call to action",
+    "home7":"wishlist",
+    "home8":"Add games you want to have to track to your wish list",
+    "home9":"library",
+    "home10":"Have your games always at hand thanks to handy and download them whenever you want"
+
+
+    
+  }

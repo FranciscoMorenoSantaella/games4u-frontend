@@ -22,20 +22,22 @@
                 </div>
               </div>
               <div class="col-md-6 col-lg-6 col-xl-6">
-                <h3>{{game.name}}</h3>
+                <h3>Nombre: {{game.name}}</h3>
                 <div class="mt-4 mb-0 text-muted small">
-                  <a *ngFor="let genre of game.genreslist">{{genre.name}}</a>
+                  Géneros: <a *ngFor="let genre of game.genreslist">{{genre.name}} </a>
                 </div>
                 <div class="mt-4 mb-2 text-muted small">
-                  <a *ngFor="let platform of game.platforms">{{platform.name}}</a>
+                  Plataformas: <a *ngFor="let platform of game.platforms">{{platform.name}}</a>
                 </div>
-                <p class="mb-2 mt-4 mb-md-0">
-                  {{game.description}}
+                <p style="text-overflow: ellipsis" class="mb-2 mt-4 mb-md-0">
+                  Descripción: {{game.description}}
                 </p>
               </div>
               <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start d-flex align-items-center justify-content-center">
                 <div class="w-100">
                   <div *ngFor="let file of game.files">
+                    <a [href]="'https://drive.google.com/uc?export=download&id=' + file.url">Descargar archivo</a>
+
                   <button *ngIf="file.executable==true" (click)="download(file.uniquename,file.originalname)" class="btn btn-outline-primary btn-sm w-100" type="button">
                     Descargar
                   </button>
@@ -65,12 +67,12 @@
               </span>
             </li>
             
-            <li class="page-item"><a *ngIf="gamelist.length == 5"  (click)="changePage(this.actualpage+1)" class="page-link">{{this.actualpage+1}}</a></li>
-            <li *ngIf="gamelist.length == 5" class="page-item">
-              <button  (click)="sumPage()" *ngIf="gamelist.length == 5" class="page-link">Next</button>
+            <li class="page-item"><a *ngIf="gamelist.length == 4"  (click)="changePage(this.actualpage+1)" class="page-link">{{this.actualpage+1}}</a></li>
+            <li *ngIf="gamelist.length == 4" class="page-item">
+              <button  (click)="sumPage()" *ngIf="gamelist.length == 4" class="page-link">Next</button>
             </li>
-            <li  *ngIf="gamelist.length < 5" class="page-item disabled">
-              <button  (click)="sumPage()" *ngIf="gamelist.length < 5" class="page-link" disabled >Next</button>
+            <li  *ngIf="gamelist.length < 4" class="page-item disabled">
+              <button  (click)="sumPage()" *ngIf="gamelist.length < 4" class="page-link" disabled >Next</button>
             </li>
           </ul>
         </nav>

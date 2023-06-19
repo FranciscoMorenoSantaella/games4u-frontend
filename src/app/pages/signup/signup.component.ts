@@ -6,6 +6,7 @@ import { AlertService } from 'src/app/services/alert.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { TranslationService } from 'src/app/services/translation.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -15,13 +16,15 @@ import { UserService } from 'src/app/services/user.service';
 })
 
 export class SignupComponent {
-    
-    
+    translations:any;
+
+
+
   
     formSignUp:FormGroup;
     constructor(private authservice:AuthService, private fb: FormBuilder,private loadingservice:LoadingService,
       private userservice:UserService, private router:Router,private alertservice:AlertService,
-      private storage:StorageService){
+      private storage:StorageService, private translationservice:TranslationService){
       this.formSignUp = this.fb.group({
         name: ['', [Validators.required,Validators.minLength(4)]],
         email: [
@@ -38,10 +41,17 @@ export class SignupComponent {
 
     }
 
-
     ngOnInit(){
+      const lang = 'en'; // Idioma seleccionado
+      this.translationservice.loadTranslations(lang).then(() => {
+      this.translations = {
+        password: this.translationservice.getTranslation('password'),
+        signin: this.translationservice.getTranslation("signin"),
+        signup:this.translationservice.getTranslation("signup"),
+        name:this.translationservice.getTranslation("name"),
+      };
+      })
     }
-
 
     async signUp() {
       if (this.formSignUp.valid) {
@@ -67,6 +77,7 @@ export class SignupComponent {
           user = await this.userservice.createUser(newUser);
     
           if (!user) {
+            this.authservice.deleteUser(result.user.uid)
             throw new Error('Error al crear el usuario en la base de datos');
           }
         } catch (error: any) {          

@@ -5,17 +5,19 @@ import { UserService } from 'src/app/services/user.service';
 import { Route, Router } from '@angular/router';
 import { StorageService } from 'src/app/services/storage.service';
 import { AlertService } from 'src/app/services/alert.service';
+import { TranslationService } from 'src/app/services/translation.service';
+import { LoadingService } from 'src/app/services/loading.service';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent {
-
+  translations:any;
   formLogin: FormGroup;
   constructor(private authservice: AuthService, private fb: FormBuilder, private userservice: UserService, 
-    private router: Router, private storage:StorageService,
-    private alertservice:AlertService) {
+    private router: Router, private storage:StorageService, private translationservice:TranslationService,
+    private alertservice:AlertService, private loadingservice:LoadingService) {
 
     this.formLogin = this.fb.group({
       email: [
@@ -31,7 +33,19 @@ export class SigninComponent {
     });
   }
 
+  ngOnInit(){
+    const lang = 'en'; // Idioma seleccionado
+    this.translationservice.loadTranslations(lang).then(() => {
+    this.translations = {
+      password: this.translationservice.getTranslation('password'),
+      signin: this.translationservice.getTranslation("signin"),
+
+    };
+    })
+  }
+
   async signIn() {
+    this.loadingservice.show();
     if (this.formLogin.valid) {
       try {
         const email = this.formLogin.get('email')!.value;
@@ -58,7 +72,10 @@ export class SigninComponent {
           this.alertservice.showErrorMessage("Error de conexión");
         }
       }
+    }else{
+      this.alertservice.showErrorMessage("El formulario no tiene los datos correctos");
     }
+    this.loadingservice.hide();
   }
 }  
 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AlertService } from 'src/app/services/alert.service';
 import { GameService } from 'src/app/services/game.service';
 import { GenreService } from 'src/app/services/genre.service';
 import { PlatformService } from 'src/app/services/platform.service';
@@ -44,7 +45,7 @@ export class UploadgameComponent {
     return this.gameForm.get('image') as FormControl
   }
 
-  constructor(private genreservice: GenreService, private platformservice: PlatformService, private fb: FormBuilder, private gameservice: GameService, private storage:StorageService) {
+  constructor(private genreservice: GenreService, private alertservice:AlertService, private platformservice: PlatformService, private fb: FormBuilder, private gameservice: GameService, private storage:StorageService) {
     this.gameForm = this.fb.group({
       name: [
         '',
@@ -109,9 +110,10 @@ export class UploadgameComponent {
       }
       try {
         const response = await this.gameservice.createGame(formData);
-        console.log(response);
+        this.alertservice.showSuccessMessage("El juego se ha creado correctamente, recibiras un correo cuando se verifique");
+        this.gameForm.reset();
       } catch (error) {
-        console.error(error);
+        this.alertservice.showErrorMessage("Ha ocurrido un error al crear el juego");
       }
     }
   }

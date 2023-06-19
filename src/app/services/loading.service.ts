@@ -15,7 +15,7 @@ export class LoadingService {
   //Metodo para mostrar el spinner
   show() {
     this._loading.next(true);
-    this.timeout(10000);
+    this.timeout(30000);
   }
 
   //Metodo para ocultar el spinner

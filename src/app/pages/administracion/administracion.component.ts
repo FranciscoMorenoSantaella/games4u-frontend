@@ -15,7 +15,7 @@ import { LoadingService } from 'src/app/services/loading.service';
 export class AdministracionComponent {
   gamelist: Game[] = [];
   actualpage: number = 0;
-  gamesperpage: number = 5;
+  gamesperpage: number = 4;
   user?: User;
   count: number = 0;
 
@@ -24,14 +24,16 @@ export class AdministracionComponent {
     private emailservice: EmailService) {
 
   }
+  
 
   async ngOnInit() {
+    this.loadingservice.show();
     await this.getGamesNotVerified();
+    this.loadingservice.hide();
   }
-
   download(uniquename: string, originalname: string) {
-    const url = 'http://localhost:8080/file/files/';
-    this.http.get(url + uniquename, { responseType: 'blob' }).subscribe((blob) => {
+    const url = 'https://drive.google.com/uc?export=download&id=1yD9EMYM1Cz5zQgDNiBiPp1Po0iVIKGJ7';
+    this.http.get(url, { responseType: 'blob' }).subscribe((blob) => {
       const downloadUrl = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = downloadUrl;
@@ -42,6 +44,8 @@ export class AdministracionComponent {
     });
   }
 
+  
+  
 
   /**
    * Metodo que resta en 1 la pagina actual
@@ -49,6 +53,7 @@ export class AdministracionComponent {
   async restPage() {
     this.loadingservice.show();
     this.actualpage--;
+    this.getGamesNotVerified();
     this.loadingservice.hide();
   }
 
@@ -58,6 +63,7 @@ export class AdministracionComponent {
   async sumPage() {
     this.loadingservice.show();
     this.actualpage++;
+    this.getGamesNotVerified();
     this.loadingservice.hide();
   }
 
@@ -68,6 +74,7 @@ export class AdministracionComponent {
   async changePage(num: number) {
     this.loadingservice.show();
     this.actualpage = num;
+    this.getGamesNotVerified();
     this.loadingservice.hide();
   }
 
@@ -80,13 +87,15 @@ export class AdministracionComponent {
   }
 
   async verifyGame(game: Game, index: number) {
+    
     try {
       if (await this.alertservice.showConfirmAlert("¿Estás seguro de que quieres verificar el juego?")) {
+        this.loadingservice.show();
         let email = await this.gameservice.getPublisherByGameId(game.id);
         let emailissended = await this.sendemail(email, "El juego ha sido verificado", `Tu juego ${game.name} ha sido verificado correctamente`);
         if (emailissended) {
           let aux = await this.gameservice.setGameVerified(game.id);
-
+          this.loadingservice.hide();
           if (aux) {
             this.gamelist.splice(index, 1);
             this.alertservice.showSuccessMessage(`El juego ${game.name} se ha verificado correctamente`);
@@ -117,17 +126,18 @@ export class AdministracionComponent {
         let motivo = await this.alertservice.showSendEmailAlert();
         if (motivo != "" && motivo != null) {
           let email = await this.gameservice.getPublisherByGameId(game.id);
+          this.loadingservice.show();
           let emailissended = await this.sendemail(email, `Tu juego ${game.name} ha sido rechazado`, `Por el siguiente motivo: ${motivo}`);
           if (emailissended) {
-            console.log(emailissended);
             let aux = await this.gameservice.setGameVerifiedNull(game.id);
+            this.loadingservice.hide();
             if (aux) {
               this.gamelist.splice(index, 1);
               this.alertservice.showSuccessMessage("El juego se ha rechazado correctamente");
             } else {
               this.alertservice.showErrorMessage("Error al rechazar el juego");
             }
-          } else {
+          }  else {
             this.alertservice.showErrorMessage("Error al enviar el correo electrónico");
           }
         } else {

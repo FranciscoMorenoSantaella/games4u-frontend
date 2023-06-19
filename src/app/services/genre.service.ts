@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Genre } from '../models/Genre';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/enviroments/enviroment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GenreService {
-  endpoint = "https://games4u.onrender.com/genre/"
+  endpoint = environment.endpoint1 + "/genre/";
   constructor(private http:HttpClient) { }
 
   /**
